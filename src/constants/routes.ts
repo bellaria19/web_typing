@@ -5,4 +5,4 @@ export const ROUTES = {
   UPLOAD: "/upload",
   ACCOUNT: "/account",
   LOGIN: "/login",
-};
+} as const;
