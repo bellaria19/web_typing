@@ -6,6 +6,8 @@ import { Wrapper } from "@/styles/common.styles";
 import { supabase } from "@/supabase/supabaseClient";
 import { LoginFormData, SignUpFormData } from "@/types/auth";
 import { useState } from "react";
+import { useSettingStore } from "@/store/settingStore";
+import { settingsService } from "@/services/settingService";
 
 const Auth = () => {
   const { navigateTo } = useNavigation();
@@ -18,6 +20,7 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
+  const { loadUserSettings } = useSettingStore();
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -29,14 +32,18 @@ const Auth = () => {
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: loginData.email,
       password: loginData.password,
     });
+
     if (error) {
       console.log(error);
       alert("로그인에 실패하였습니다.");
     } else {
+      if (data.user) {
+        await loadUserSettings(data.user.id);
+      }
       alert("로그인에 성공하였습니다.");
       navigateTo(ROUTES.TYPING);
     }
@@ -50,14 +57,19 @@ const Auth = () => {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: signUpData.email,
       password: signUpData.password,
     });
+
     if (error) {
       console.log(error);
       alert("회원가입에 실패하였습니다.");
     } else {
+      if (data.user) {
+        const { settings } = useSettingStore.getState();
+        await settingsService.saveUserSettings(data.user.id, settings);
+      }
       alert("회원가입에 성공하였습니다. 이메일을 확인해주세요.");
       navigateTo(ROUTES.LOGIN);
     }

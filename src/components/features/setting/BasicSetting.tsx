@@ -19,17 +19,11 @@ export const BasicSetting = () => {
 
   return (
     <Container>
-      <Title>
-        <i className="fas fa-chevron-down" />
-        {t("SETTINGS.SECTIONS.BASIC")}
-      </Title>
+      <Title>{t("SETTINGS.SECTIONS.BASIC")}</Title>
 
       <OptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-language" />
-            {t("SETTINGS.OPTIONS.LANGUAGE.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.LANGUAGE.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.LANGUAGE.DESCRIPTION")}
           </OptionDescription>
@@ -52,10 +46,7 @@ export const BasicSetting = () => {
 
       <OptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-star" />
-            {t("SETTINGS.OPTIONS.DIFFICULTY.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.DIFFICULTY.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.DIFFICULTY.DESCRIPTION.NORMAL")}
             <br />

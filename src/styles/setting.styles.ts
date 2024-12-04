@@ -70,7 +70,23 @@ export const ThemeOptionGrid = styled(OptionGrid)`
 
 export const SizeInput = styled.input`
   padding: 0.5rem;
-  border: 1px solid ${foundations.colors.secondary};
+  border: 1px solid ${({ theme }) => theme.subColor};
   border-radius: ${foundations.radius.sm};
   width: 100px;
+  background-color: ${({ theme }) => theme.bgColor};
+  color: ${({ theme }) => theme.textColor};
+  text-align: center;
+  font-size: ${foundations.typography.size.md};
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.mainColor};
+  }
+
+  /* 숫자 입력 화살표 스타일링 */
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 24px;
+  }
 `;

@@ -33,7 +33,7 @@ export const UserInfo = styled.div`
   color: ${({ theme }) => theme.textColor};
 `;
 
-export const LogoutBtn = styled.div`
+export const LogoutBtn = styled.button`
   color: ${({ theme }) => theme.textColor};
   cursor: pointer;
   transition: opacity ${foundations.animation.duration.fast};

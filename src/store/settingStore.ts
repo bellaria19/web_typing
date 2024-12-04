@@ -21,6 +21,20 @@ interface SettingsState {
   ) => void;
 }
 
+const saveSettings = async (settings: TypingSettings, userId: string) => {
+  await settingsService.saveUserSettings(userId, settings);
+};
+
+const applySettings = (settings: TypingSettings) => {
+  // 폰트 크기 적용
+  document.documentElement.style.setProperty(
+    "--font-scale",
+    String(settings.appearance.fontSize)
+  );
+
+  // 다른 설정들도 필요한 경우 여기에 추가
+};
+
 export const useSettingStore = create<SettingsState>((set, get) => ({
   settings: {
     behavior: {
@@ -29,10 +43,9 @@ export const useSettingStore = create<SettingsState>((set, get) => ({
       blindMode: false,
       confidenceMode: "off",
       indicateTypos: "off",
-      language: "ko",
     },
     appearance: {
-      fontSize: 16,
+      fontSize: 1.0,
       smoothCaret: true,
       caretStyle: "block",
     },
@@ -48,6 +61,7 @@ export const useSettingStore = create<SettingsState>((set, get) => ({
     const settings = await settingsService.getUserSettings(userId);
     if (settings) {
       set({ settings, isLoaded: true });
+      applySettings(settings);
     }
   },
 
@@ -69,15 +83,17 @@ export const useSettingStore = create<SettingsState>((set, get) => ({
   },
 
   updateAppearance: (key, value) => {
-    set((state) => ({
-      settings: {
+    set((state) => {
+      const newSettings = {
         ...state.settings,
         appearance: {
           ...state.settings.appearance,
           [key]: value,
         },
-      },
-    }));
+      };
+      applySettings(newSettings);
+      return { settings: newSettings };
+    });
   },
 
   updateSound: (key, value) => {
@@ -92,3 +108,10 @@ export const useSettingStore = create<SettingsState>((set, get) => ({
     }));
   },
 }));
+
+export const saveUserSettingsIfLoggedIn = (userId: string | undefined) => {
+  if (userId) {
+    const settings = useSettingStore.getState().settings;
+    saveSettings(settings, userId);
+  }
+};

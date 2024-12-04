@@ -15,51 +15,44 @@ import { useTranslation } from "react-i18next";
 
 export const AppearanceSetting = () => {
   const { t } = useTranslation();
-  const { updateAppearance } = useSettingStore();
+  const { settings, updateAppearance } = useSettingStore();
   const { currentTheme, setTheme } = useThemeStore();
 
   return (
     <Container>
-      <Title>
-        <i className="fas fa-chevron-down" />
-        {t("SETTINGS.SECTIONS.APPEARANCE")}
-      </Title>
+      <Title>{t("SETTINGS.SECTIONS.APPEARANCE")}</Title>
 
       <OptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-font" />
-            {t("SETTINGS.OPTIONS.FONT_SIZE.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.FONT_SIZE.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.FONT_SIZE.DESCRIPTION")}
           </OptionDescription>
         </div>
-        <SizeInput
-          type="number"
-          value={t("SETTINGS.OPTIONS.FONT_SIZE.VALUE")}
-          onChange={(e) => {
-            const value = Number(e.target.value);
-            if (value >= 0.5 && value <= 3) {
-              updateAppearance("fontSize", value);
-              document.documentElement.style.setProperty(
-                "--font-scale",
-                String(value)
-              );
-            }
-          }}
-          min={0.5}
-          max={3}
-          step={0.1}
-        />
+        <div className="flex items-center gap-2">
+          <SizeInput
+            type="number"
+            value={settings.appearance.fontSize}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 0.5 && value <= 3) {
+                updateAppearance("fontSize", value);
+                document.documentElement.style.setProperty(
+                  "--font-scale",
+                  String(value)
+                );
+              }
+            }}
+            min={0.5}
+            max={3}
+            step={0.1}
+          />
+        </div>
       </OptionGrid>
 
       <ThemeOptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-palette" />
-            {t("SETTINGS.OPTIONS.THEME.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.THEME.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.THEME.DESCRIPTION")}
           </OptionDescription>

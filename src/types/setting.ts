@@ -1,4 +1,3 @@
-export type Language = "ko" | "en";
 export type TypingDifficulty = "normal" | "expert" | "master";
 export type QuickRestartType = "off" | "tab" | "esc" | "enter";
 export type ConfidenceModeType = "off" | "on" | "max";
@@ -14,7 +13,6 @@ export interface TypingSettings {
     blindMode: boolean;
     confidenceMode: ConfidenceModeType;
     indicateTypos: IndicateTyposType;
-    language: Language;
   };
   appearance: {
     fontSize: number;

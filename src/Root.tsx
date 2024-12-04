@@ -8,8 +8,19 @@ import { ThemeProvider } from "styled-components";
 import { useThemeStore } from "@/store/themeStore";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/locales/i18n";
+import { useSettingStore } from "@/store/settingStore";
+import { useEffect } from "react";
+
 const Root = () => {
+  const { settings } = useSettingStore();
   const currentTheme = useThemeStore((state) => state.currentTheme);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--font-scale",
+      String(settings.appearance.fontSize)
+    );
+  }, [settings]);
 
   return (
     <I18nextProvider i18n={i18n}>

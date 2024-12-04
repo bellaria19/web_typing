@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/supabase/supabaseClient";
 import { User } from "@supabase/supabase-js";
+import { useSettingStore } from "@/store/settingStore";
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { loadUserSettings } = useSettingStore();
 
   useEffect(() => {
-    // 현재 세션 확인
     const checkUser = async () => {
       try {
         const {
           data: { user },
         } = await supabase.auth.getUser();
         setUser(user);
+
+        if (user) {
+          await loadUserSettings(user.id);
+        }
       } catch (error) {
         console.error("Error checking auth state:", error);
       } finally {
@@ -21,22 +26,24 @@ export const useAuth = () => {
       }
     };
 
-    // 초기 세션 확인
     checkUser();
 
-    // 인증 상태 변경 구독
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+
+      if (currentUser) {
+        await loadUserSettings(currentUser.id);
+      }
       setLoading(false);
     });
 
-    // 클린업 함수
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [loadUserSettings]);
 
   return { user, loading };
 };
