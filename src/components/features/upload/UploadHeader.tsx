@@ -1,14 +1,12 @@
 import { Header } from "@/styles/upload.styles";
-// import { useText } from "@/hooks/useText";
 import { Title } from "@/styles/common.styles";
+import { useTranslation } from "react-i18next";
 
 const UploadHeader = () => {
-  // const text = useText();
-
+  const { t } = useTranslation();
   return (
     <Header>
-      <Title>Upload</Title>
-      {/* <Title>{text.UPLOAD.TITLE}</Title> */}
+      <Title>{t("UPLOAD.TITLE")}</Title>
     </Header>
   );
 };

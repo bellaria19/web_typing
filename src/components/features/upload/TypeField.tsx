@@ -2,8 +2,7 @@ import { Container, Label } from "@/styles/common.styles";
 import { TypeBtn, TypeWrapper } from "@/styles/upload.styles";
 import { UploadType } from "@/types/upload";
 import { getUploadTypeLabel, UPLOAD_TYPES } from "@/constants/uploadType";
-// import { useLanguageStore } from "@/store/languageStore";
-// import { useText } from "@/hooks/useText";
+import { useTranslation } from "react-i18next";
 
 interface TypeFieldProps {
   selectedType: UploadType | undefined;
@@ -11,13 +10,11 @@ interface TypeFieldProps {
 }
 
 const TypeField = ({ selectedType, onTypeClick }: TypeFieldProps) => {
-  //   const { language } = useLanguageStore();
-  //   const text = useText();
+  const { t } = useTranslation();
 
   return (
     <Container>
-      {/* <Label>{text.UPLOAD.CATEGORY}</Label> */}
-      <Label>Type</Label>
+      <Label htmlFor="type">{t("UPLOAD.TYPE")}</Label>
       <TypeWrapper>
         {UPLOAD_TYPES.map((type) => (
           <TypeBtn

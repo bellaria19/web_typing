@@ -105,9 +105,11 @@
   "UPLOAD": {
     "TITLE": "Typing Practice Text Upload",
     "CONTENT": "Content",
+    "CONTENT_PLACEHOLDER": "Enter your typing practice text here",
     "DESCRIPTION": "Description",
     "DESCRIPTION_PLACEHOLDER": "Enter a brief description of the typing practice",
     "CATEGORY": "Category",
+    "TYPE": "Type",
     "SUBMIT": "Upload"
   }
 }

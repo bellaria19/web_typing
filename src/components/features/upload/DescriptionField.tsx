@@ -1,5 +1,4 @@
-// import { MAX_LENGTHS } from "@/constants";
-// import { useText } from "@/hooks/useText";
+import { useTranslation } from "react-i18next";
 import { Label, Container } from "@/styles/common.styles";
 import { CharCount, UploadTextArea } from "@/styles/upload.styles";
 
@@ -9,19 +8,17 @@ interface DescriptionFieldProps {
 }
 
 const DescriptionField = ({ description, onChange }: DescriptionFieldProps) => {
-  // const text = useText();
+  const { t } = useTranslation();
 
   return (
     <Container>
-      {/* <Label htmlFor="description">{text.UPLOAD.DESCRIPTION}</Label> */}
-      <Label>Description</Label>
+      <Label htmlFor="description">{t("UPLOAD.DESCRIPTION")}</Label>
       <UploadTextArea
         id="description"
         className="description"
         value={description}
         onChange={onChange}
-        // placeholder={text.UPLOAD.DESCRIPTION_PLACEHOLDER}
-        placeholder="Description"
+        placeholder={t("UPLOAD.DESCRIPTION_PLACEHOLDER")}
         required
         maxLength={1000}
       />

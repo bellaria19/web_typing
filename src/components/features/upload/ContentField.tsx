@@ -1,5 +1,4 @@
-// import { MAX_LENGTHS } from "@/constants";
-// import { useText } from "@/hooks/useText";
+import { useTranslation } from "react-i18next";
 import { Label, Container } from "@/styles/common.styles";
 import { CharCount, UploadTextArea } from "@/styles/upload.styles";
 
@@ -9,18 +8,17 @@ interface ContentFieldProps {
 }
 
 const ContentField = ({ content, onChange }: ContentFieldProps) => {
-  // const text = useText();
+  const { t } = useTranslation();
 
   return (
     <Container>
-      {/* <Label htmlFor="content">{text.UPLOAD.CONTENT}</Label> */}
-      <Label>Content</Label>
+      <Label htmlFor="content">{t("UPLOAD.CONTENT")}</Label>
       <UploadTextArea
         id="content"
         className="content"
         value={content}
         onChange={onChange}
-        placeholder="Enter your content here..."
+        placeholder={t("UPLOAD.CONTENT_PLACEHOLDER")}
         required
         maxLength={1000}
       />

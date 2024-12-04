@@ -1,9 +1,9 @@
-// import { useLanguageStore } from "@/store/languageStore";
-// import { useText } from "@/hooks/useText";
+import { useTranslation } from "react-i18next";
 import { Container, Label } from "@/styles/common.styles";
 import { Category } from "@/types/upload";
 import { TYPING_CATEGORIES, getCategoryLabel } from "@/constants/categories";
 import { CategoryWrapper, CategoryBtn } from "@/styles/upload.styles";
+import { Language } from "@/types/language";
 
 interface CategoryFieldProps {
   selectedCategory: Category | undefined;
@@ -14,14 +14,12 @@ const CategoryField = ({
   selectedCategory,
   onCategoryClick,
 }: CategoryFieldProps) => {
-  const language = "ko";
-  // const { language } = useLanguageStore();
-  // const text = useText();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language as Language;
 
   return (
     <Container>
-      {/* <Label>{text.UPLOAD.CATEGORY}</Label> */}
-      <Label>Category</Label>
+      <Label htmlFor="category">{t("UPLOAD.CATEGORY")} </Label>
       <CategoryWrapper>
         {TYPING_CATEGORIES.map((category) => (
           <CategoryBtn

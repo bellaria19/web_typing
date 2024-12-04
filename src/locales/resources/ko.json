@@ -105,9 +105,11 @@
   "UPLOAD": {
     "TITLE": "타자 연습 텍스트 업로드",
     "CONTENT": "내용",
+    "CONTENT_PLACEHOLDER": "타자 연습 텍스트를 입력하세요",
     "DESCRIPTION": "설명",
     "DESCRIPTION_PLACEHOLDER": "입력한 텍스트에 대한 간략한 설명을 입력하세요",
     "CATEGORY": "카테고리",
+    "TYPE": "유형",
     "SUBMIT": "업로드"
   }
 }
