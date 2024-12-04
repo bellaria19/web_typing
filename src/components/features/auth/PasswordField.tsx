@@ -1,4 +1,5 @@
-import { Label, Input } from "@/styles/auth.styles";
+import { Input } from "@/styles/auth.styles";
+import { Label } from "@/styles/common.styles";
 
 interface PasswordInputProps {
   id?: string;
@@ -9,7 +10,7 @@ interface PasswordInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PasswordInput = ({
+const PasswordField = ({
   id = "loginPassword",
   name = "password",
   placeholder = "Password",
@@ -33,4 +34,4 @@ const PasswordInput = ({
   );
 };
 
-export default PasswordInput;
+export default PasswordField;

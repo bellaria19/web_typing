@@ -1,5 +1,5 @@
-import EmailInput from "@/components/features/auth/EmailInput";
-import PasswordInput from "@/components/features/auth/PasswordInput";
+import EmailInput from "@/components/features/auth/EmailField";
+import PasswordInput from "@/components/features/auth/PasswordField";
 import { Button, Title } from "@/styles/auth.styles";
 import { LoginFormData } from "@/types/auth";
 

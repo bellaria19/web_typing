@@ -1,4 +1,5 @@
-import { Label, Input } from "@/styles/auth.styles";
+import { Input } from "@/styles/auth.styles";
+import { Label } from "@/styles/common.styles";
 
 interface EmailInputProps {
   id?: string;
@@ -9,7 +10,7 @@ interface EmailInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EmailInput = ({
+const EmailField = ({
   id = "loginEmail",
   name = "email",
   placeholder = "Email",
@@ -33,4 +34,4 @@ const EmailInput = ({
   );
 };
 
-export default EmailInput;
+export default EmailField;

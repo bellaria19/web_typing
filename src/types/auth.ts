@@ -1,10 +1,8 @@
-export type LoginFormData = {
+export interface LoginFormData {
   email: string;
   password: string;
-};
+}
 
-export type SignUpFormData = {
-  email: string;
-  password: string;
+export interface SignUpFormData extends LoginFormData {
   confirmPassword: string;
-};
+}

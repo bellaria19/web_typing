@@ -3,7 +3,7 @@ import { useNavigation } from "@/hooks/useNavigation";
 import { useAuth } from "@/hooks/useAuth";
 import {
   HeaderWrapper,
-  HeaderText,
+  HeaderTitle,
   Nav,
   NavButton,
 } from "@/styles/header.styles";
@@ -14,7 +14,9 @@ export const Header = () => {
 
   return (
     <HeaderWrapper>
-      <HeaderText onClick={() => navigateTo(ROUTES.TYPING)}>typing</HeaderText>
+      <HeaderTitle onClick={() => navigateTo(ROUTES.TYPING)}>
+        typing
+      </HeaderTitle>
 
       <Nav>
         <NavButton onClick={() => navigateTo(ROUTES.SETTINGS)}>

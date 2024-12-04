@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.div`
   padding: 0 2rem;
 `;
 
-export const HeaderText = styled.div`
+export const HeaderTitle = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;

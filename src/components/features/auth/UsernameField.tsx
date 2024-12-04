@@ -1,6 +1,7 @@
-import { Input, Label } from "@/styles/auth.styles";
+import { Input } from "@/styles/auth.styles";
+import { Label } from "@/styles/common.styles";
 
-interface UsernameInputProps {
+interface UsernameFieldProps {
   id?: string;
   name?: string;
   placeholder?: string;
@@ -9,14 +10,14 @@ interface UsernameInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const UsernameInput = ({
+const UsernameField = ({
   id = "username",
   name = "username",
   placeholder = "Username",
   required = true,
   value,
   onChange,
-}: UsernameInputProps) => {
+}: UsernameFieldProps) => {
   return (
     <div>
       <Label htmlFor={id}>Username</Label>
@@ -33,4 +34,4 @@ const UsernameInput = ({
   );
 };
 
-export default UsernameInput;
+export default UsernameField;
