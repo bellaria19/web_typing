@@ -4,23 +4,21 @@ import { Outlet } from "react-router-dom";
 import { PageContainer } from "@/styles/common.styles";
 import GlobalStyle from "@/styles/GlobalStyle";
 
-// import { ThemeProvider } from "styled-components";
-// import { useThemeStore } from "@/store/themeStore";
+import { ThemeProvider } from "styled-components";
+import { useThemeStore } from "@/store/themeStore";
 
 const Root = () => {
-  // const currentTheme = useThemeStore((state) => state.currentTheme);
+  const currentTheme = useThemeStore((state) => state.currentTheme);
 
   return (
-    // <ThemeProvider theme={currentTheme}>
-    <>
+    <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
       <Header />
       <PageContainer>
         <Outlet />
       </PageContainer>
       <Footer />
-    </>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 };
 
