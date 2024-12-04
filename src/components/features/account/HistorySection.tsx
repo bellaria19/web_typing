@@ -1,14 +1,12 @@
-// import { useText } from "@/hooks/useText";
-
 import { Section, SectionTitle } from "@/styles/account.styles";
+import { useTranslation } from "react-i18next";
 
 export const HistorySection = () => {
-  //   const text = useText();
+  const { t } = useTranslation();
 
   return (
     <Section>
-      {/* <SectionTitle>{text.ACCOUNT.HISTORY}</SectionTitle> */}
-      <SectionTitle>History</SectionTitle>
+      <SectionTitle>{t("ACCOUNT.HISTORY.TITLE")}</SectionTitle>
     </Section>
   );
 };

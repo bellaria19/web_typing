@@ -1,6 +1,6 @@
 import EmailInput from "@/components/features/auth/EmailField";
-import PasswordInput from "@/components/features/auth/PasswordField";
-import { Title, Button } from "@/styles/auth.styles";
+import PasswordField from "@/components/features/auth/PasswordField";
+import { AuthTitle, Button } from "@/styles/auth.styles";
 import { SignUpFormData } from "@/types/auth";
 
 interface SignUpFormProps {
@@ -18,7 +18,7 @@ const SignUpForm = ({
 }: SignUpFormProps) => {
   return (
     <div className="p-8 space-y-8">
-      <Title>Sign Up</Title>
+      <AuthTitle>Sign Up</AuthTitle>
       <form onSubmit={onSubmit} className="mt-8 space-y-6">
         <div className="space-y-4">
           <EmailInput
@@ -26,12 +26,12 @@ const SignUpForm = ({
             value={formData.email}
             onChange={onChange}
           />
-          <PasswordInput
+          <PasswordField
             id="signupPassword"
             value={formData.password}
             onChange={onChange}
           />
-          <PasswordInput
+          <PasswordField
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Password Confirm"

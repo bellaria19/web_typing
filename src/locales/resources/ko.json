@@ -1,0 +1,113 @@
+{
+  "TYPING": {
+    "SETTING": "타자 연습 설정"
+  },
+  "COMMON": {
+    "LOADING": "로딩 중...",
+    "ERROR": "오류가 발생했습니다",
+    "SAVE": "저장",
+    "CANCEL": "취소"
+  },
+  "NAV": {
+    "HOME": "홈",
+    "TYPING": "타자 연습",
+    "SETTINGS": "설정",
+    "UPLOAD": "업로드",
+    "ACCOUNT": "계정",
+    "LOGIN": "로그인",
+    "LOGOUT": "로그아웃"
+  },
+  "SETTINGS": {
+    "TITLE": "설정",
+    "SECTIONS": {
+      "BASIC": "기본 설정",
+      "TYPING": "타이핑 설정",
+      "APPEARANCE": "화면 설정"
+    },
+    "OPTIONS": {
+      "LANGUAGE": {
+        "LABEL": "언어",
+        "DESCRIPTION": "타이핑 테스트에 사용할 언어를 선택하세요.",
+        "BUTTONS": {
+          "KO": "한국어",
+          "EN": "English"
+        }
+      },
+      "DIFFICULTY": {
+        "LABEL": "난이도",
+        "DESCRIPTION": {
+          "NORMAL": "일반: 기본 타이핑 테스트",
+          "EXPERT": "전문가: 잘못된 단어 입력시 실패",
+          "MASTER": "마스터: 한 글자라도 틀리면 실패"
+        },
+        "BUTTONS": {
+          "NORMAL": "일반",
+          "EXPERT": "전문가",
+          "MASTER": "마스터"
+        }
+      },
+      "BLIND_MODE": {
+        "LABEL": "블라인드 모드",
+        "DESCRIPTION": "오타나 잘못된 단어를 표시하지 않습니다.",
+        "BUTTONS": {
+          "ON": "켜기",
+          "OFF": "끄기"
+        }
+      },
+      "QUICK_RESTART": {
+        "LABEL": "빠른 재시작",
+        "DESCRIPTION": "Tab, Esc 또는 Enter로 빠르게 재시작할 수 있습니다.",
+        "BUTTONS": {
+          "OFF": "끄기",
+          "TAB": "Tab",
+          "ESC": "Esc",
+          "ENTER": "Enter"
+        }
+      },
+      "FONT_SIZE": {
+        "LABEL": "글꼴 크기",
+        "DESCRIPTION": "테스트 글자의 크기를 변경합니다."
+      },
+      "THEME": {
+        "LABEL": "테마",
+        "DESCRIPTION": "화면 테마를 선택합니다.",
+        "MODAL_TITLE": "테마 선택"
+      }
+    }
+  },
+  "ACCOUNT": {
+    "STATS": {
+      "TITLE": "통계",
+      "AVG": "평균 속도",
+      "WPM_CPM": "WPM / CPM",
+      "WPM": "WPM",
+      "CPM": "CPM",
+      "ACCURACY": "정확도"
+    },
+    "BEST_SPEED": {
+      "TITLE": "최고 속도",
+      "WPM": "WPM",
+      "CPM": "CPM"
+    },
+    "ACCURACY": {
+      "TITLE": "정확도"
+    },
+    "TIME_PERIODS": {
+      "TOTAL": "Total",
+      "MONTH": "Month",
+      "WEEK": "Week",
+      "TODAY": "Today"
+    },
+    "HISTORY": {
+      "TITLE": "기록"
+    }
+  },
+  "UPLOAD": {
+    "TITLE": "타자 연습 텍스트 업로드",
+    "CONTENT": "내용",
+    "DESCRIPTION": "설명",
+    "DESCRIPTION_PLACEHOLDER": "입력한 텍스트에 대한 간략한 설명을 입력하세요",
+    "CATEGORY": "카테고리",
+    "SUBMIT": "업로드"
+  }
+}

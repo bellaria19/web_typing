@@ -1,7 +1,7 @@
 import { Input } from "@/styles/auth.styles";
 import { Label } from "@/styles/common.styles";
 
-interface PasswordInputProps {
+interface PasswordFieldProps {
   id?: string;
   name?: string;
   placeholder?: string;
@@ -17,7 +17,7 @@ const PasswordField = ({
   required = true,
   value,
   onChange,
-}: PasswordInputProps) => {
+}: PasswordFieldProps) => {
   return (
     <div>
       <Label htmlFor={id}>Password</Label>

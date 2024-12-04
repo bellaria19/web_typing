@@ -6,19 +6,22 @@ import GlobalStyle from "@/styles/GlobalStyle";
 
 import { ThemeProvider } from "styled-components";
 import { useThemeStore } from "@/store/themeStore";
-
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/locales/i18n";
 const Root = () => {
   const currentTheme = useThemeStore((state) => state.currentTheme);
 
   return (
-    <ThemeProvider theme={currentTheme}>
-      <GlobalStyle />
-      <Header />
-      <PageContainer>
-        <Outlet />
-      </PageContainer>
-      <Footer />
-    </ThemeProvider>
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider theme={currentTheme}>
+        <GlobalStyle />
+        <Header />
+        <PageContainer>
+          <Outlet />
+        </PageContainer>
+        <Footer />
+      </ThemeProvider>
+    </I18nextProvider>
   );
 };
 

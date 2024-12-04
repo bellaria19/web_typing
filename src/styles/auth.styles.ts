@@ -8,7 +8,7 @@ export const Label = styled.label`
   margin-bottom: ${foundations.spacing.sm};
 `;
 
-export const Title = styled.div`
+export const AuthTitle = styled.div`
   text-align: center;
   font-size: ${foundations.typography.size.lg};
   font-weight: ${foundations.typography.weight.bold};

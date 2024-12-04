@@ -8,26 +8,29 @@ import {
   StatValue,
 } from "@/styles/account.styles";
 import { StatsContainer } from "@/components/features/account/StatsContainer";
+import { useTranslation } from "react-i18next";
 
 export const StatsSection = () => {
+  const { t } = useTranslation();
+
   return (
     <Section>
       <SectionHeader>
-        <SectionTitle>Stats</SectionTitle>
+        <SectionTitle>{t("ACCOUNT.STATS.TITLE")}</SectionTitle>
         <StatsContainer />
       </SectionHeader>
 
       <StatsGrid>
         <StatCard>
-          <StatTitle>AVG</StatTitle>
+          <StatTitle>{t("ACCOUNT.STATS.AVG")}</StatTitle>
           <StatValue>100</StatValue>
         </StatCard>
         <StatCard>
-          <StatTitle>WPM / CPM</StatTitle>
+          <StatTitle>{t("ACCOUNT.STATS.WPM_CPM")}</StatTitle>
           <StatValue>50 / 100</StatValue>
         </StatCard>
         <StatCard>
-          <StatTitle>ACC</StatTitle>
+          <StatTitle>{t("ACCOUNT.STATS.ACCURACY")}</StatTitle>
           <StatValue>90%</StatValue>
         </StatCard>
       </StatsGrid>

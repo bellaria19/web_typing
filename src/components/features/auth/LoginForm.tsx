@@ -1,6 +1,6 @@
-import EmailInput from "@/components/features/auth/EmailField";
-import PasswordInput from "@/components/features/auth/PasswordField";
-import { Button, Title } from "@/styles/auth.styles";
+import EmailField from "@/components/features/auth/EmailField";
+import PasswordField from "@/components/features/auth/PasswordField";
+import { AuthTitle, Button } from "@/styles/auth.styles";
 import { LoginFormData } from "@/types/auth";
 
 interface LoginFormProps {
@@ -13,10 +13,10 @@ interface LoginFormProps {
 const LoginForm = ({ formData, onChange, onSubmit, error }: LoginFormProps) => {
   return (
     <div className="p-8 space-y-8">
-      <Title>Login</Title>
+      <AuthTitle>Login</AuthTitle>
       <form onSubmit={onSubmit} className="mt-4 space-y-4">
-        <EmailInput value={formData.email} onChange={onChange} />
-        <PasswordInput value={formData.password} onChange={onChange} />
+        <EmailField value={formData.email} onChange={onChange} />
+        <PasswordField value={formData.password} onChange={onChange} />
         {error && <div className="text-sm text-red-500">{error}</div>}
         <Button type="submit">Login</Button>
       </form>

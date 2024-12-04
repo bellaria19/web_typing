@@ -1,0 +1,113 @@
+{
+  "TYPING": {
+    "SETTING": "Typing Setting"
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "An error occurred",
+    "SAVE": "Save",
+    "CANCEL": "Cancel"
+  },
+  "NAV": {
+    "HOME": "Home",
+    "TYPING": "Typing",
+    "SETTINGS": "Settings",
+    "UPLOAD": "Upload",
+    "ACCOUNT": "Account",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "SECTIONS": {
+      "BASIC": "Basic Settings",
+      "TYPING": "Typing Settings",
+      "APPEARANCE": "Appearance Settings"
+    },
+    "OPTIONS": {
+      "LANGUAGE": {
+        "LABEL": "Language",
+        "DESCRIPTION": "Select the language for typing practice.",
+        "BUTTONS": {
+          "KO": "Korean",
+          "EN": "English"
+        }
+      },
+      "DIFFICULTY": {
+        "LABEL": "Difficulty",
+        "DESCRIPTION": {
+          "NORMAL": "Normal: Classic typing practice",
+          "EXPERT": "Expert: Fail if you submit an incorrect word",
+          "MASTER": "Master: Fail if you make even one mistake"
+        },
+        "BUTTONS": {
+          "NORMAL": "Normal",
+          "EXPERT": "Expert",
+          "MASTER": "Master"
+        }
+      },
+      "BLIND_MODE": {
+        "LABEL": "Blind Mode",
+        "DESCRIPTION": "Hide typos and incorrect words.",
+        "BUTTONS": {
+          "ON": "Turn On",
+          "OFF": "Turn Off"
+        }
+      },
+      "QUICK_RESTART": {
+        "LABEL": "Quick Restart",
+        "DESCRIPTION": "Press Tab, Esc, or Enter to quickly restart the test.",
+        "BUTTONS": {
+          "OFF": "Turn Off",
+          "TAB": "Tab",
+          "ESC": "Esc",
+          "ENTER": "Enter"
+        }
+      },
+      "FONT_SIZE": {
+        "LABEL": "Font Size",
+        "DESCRIPTION": "Change the font size of the test text."
+      },
+      "THEME": {
+        "LABEL": "Theme",
+        "DESCRIPTION": "Select the theme for the screen.",
+        "MODAL_TITLE": "Theme Selection"
+      }
+    }
+  },
+  "ACCOUNT": {
+    "STATS": {
+      "TITLE": "Statistics",
+      "AVG": "Average Speed",
+      "WPM_CPM": "WPM / CPM",
+      "WPM": "WPM",
+      "CPM": "CPM",
+      "ACCURACY": "Accuracy"
+    },
+    "BEST_SPEED": {
+      "TITLE": "Best Speed",
+      "WPM": "WPM",
+      "CPM": "CPM"
+    },
+    "ACCURACY": {
+      "TITLE": "Accuracy"
+    },
+    "TIME_PERIODS": {
+      "TOTAL": "Total",
+      "MONTH": "Month",
+      "WEEK": "Week",
+      "TODAY": "Today"
+    },
+    "HISTORY": {
+      "TITLE": "History"
+    }
+  },
+  "UPLOAD": {
+    "TITLE": "Typing Practice Text Upload",
+    "CONTENT": "Content",
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_PLACEHOLDER": "Enter a brief description of the typing practice",
+    "CATEGORY": "Category",
+    "SUBMIT": "Upload"
+  }
+}

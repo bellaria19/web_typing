@@ -1,7 +1,7 @@
 import { Input } from "@/styles/auth.styles";
 import { Label } from "@/styles/common.styles";
 
-interface EmailInputProps {
+interface EmailFieldProps {
   id?: string;
   name?: string;
   placeholder?: string;
@@ -17,7 +17,7 @@ const EmailField = ({
   required = true,
   value,
   onChange,
-}: EmailInputProps) => {
+}: EmailFieldProps) => {
   return (
     <>
       <Label htmlFor={id}>Email</Label>
