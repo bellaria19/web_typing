@@ -6,7 +6,7 @@ import {
   HeaderText,
   Nav,
   NavButton,
-} from "@/styles/header/styles";
+} from "@/styles/header.styles";
 
 export const Header = () => {
   const { navigateTo } = useNavigation();
