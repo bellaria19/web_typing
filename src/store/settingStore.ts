@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { TypingSettings } from "@/types/setting";
 import { settingsService } from "@/services/settingService";
 
-interface SettingsState {
+interface SettingState {
   settings: TypingSettings;
   isLoaded: boolean;
   loadUserSettings: (userId: string) => Promise<void>;
@@ -35,7 +35,7 @@ const applySettings = (settings: TypingSettings) => {
   // 다른 설정들도 필요한 경우 여기에 추가
 };
 
-export const useSettingStore = create<SettingsState>((set, get) => ({
+export const useSettingStore = create<SettingState>((set, get) => ({
   settings: {
     behavior: {
       difficulty: "normal",

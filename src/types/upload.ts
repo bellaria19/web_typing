@@ -1,8 +1,8 @@
 export interface UploadFormData {
   content: string;
   description: string;
-  type: UploadType;
   category: Category | undefined;
+  type: UploadType;
 }
 
 export interface CategoryLabel {
