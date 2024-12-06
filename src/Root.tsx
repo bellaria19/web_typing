@@ -18,7 +18,7 @@ const Root = () => {
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--font-scale",
-      String(settings.appearance.fontSize)
+      String(settings.fontSize)
     );
   }, [settings]);
 

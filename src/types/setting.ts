@@ -7,21 +7,15 @@ export type ClickSoundType = "off" | "click" | "beep" | "pop";
 export type ErrorSoundType = "off" | "beep" | "bump";
 
 export interface TypingSettings {
-  behavior: {
-    difficulty: TypingDifficulty;
-    quickRestart: QuickRestartType;
-    blindMode: boolean;
-    confidenceMode: ConfidenceModeType;
-    indicateTypos: IndicateTyposType;
-  };
-  appearance: {
-    fontSize: number;
-    smoothCaret: boolean;
-    caretStyle: CaretStyleType;
-  };
-  sound: {
-    volume: number;
-    clickSound: ClickSoundType;
-    errorSound: ErrorSoundType;
-  };
+  difficulty: TypingDifficulty;
+  quickRestart: QuickRestartType;
+  blindMode: boolean;
+  confidenceMode: ConfidenceModeType;
+  indicateTypos: IndicateTyposType;
+  fontSize: number;
+  smoothCaret: boolean;
+  caretStyle: CaretStyleType;
+  volume: number;
+  clickSound: ClickSoundType;
+  errorSound: ErrorSoundType;
 }

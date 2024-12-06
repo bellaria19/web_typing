@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export const BasicSetting = () => {
   const { t, i18n } = useTranslation();
-  const { settings, updateBehavior } = useSettingStore();
+  const { settings, updateSettings } = useSettingStore();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -57,20 +57,20 @@ export const BasicSetting = () => {
         </div>
         <ButtonGroup>
           <SettingButton
-            $isSelected={settings.behavior.difficulty === "normal"}
-            onClick={() => updateBehavior("difficulty", "normal")}
+            $isSelected={settings.difficulty === "normal"}
+            onClick={() => updateSettings("difficulty", "normal")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.NORMAL")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.difficulty === "expert"}
-            onClick={() => updateBehavior("difficulty", "expert")}
+            $isSelected={settings.difficulty === "expert"}
+            onClick={() => updateSettings("difficulty", "expert")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.EXPERT")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.difficulty === "master"}
-            onClick={() => updateBehavior("difficulty", "master")}
+            $isSelected={settings.difficulty === "master"}
+            onClick={() => updateSettings("difficulty", "master")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.MASTER")}
           </SettingButton>

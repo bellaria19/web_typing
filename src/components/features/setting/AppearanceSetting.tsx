@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 
 export const AppearanceSetting = () => {
   const { t } = useTranslation();
-  const { settings, updateAppearance } = useSettingStore();
+  const { settings, updateSettings } = useSettingStore();
   const { currentTheme, setTheme } = useThemeStore();
 
   return (
@@ -32,11 +32,11 @@ export const AppearanceSetting = () => {
         <div className="flex items-center gap-2">
           <SizeInput
             type="number"
-            value={settings.appearance.fontSize}
+            value={settings.fontSize}
             onChange={(e) => {
               const value = Number(e.target.value);
               if (value >= 0.5 && value <= 3) {
-                updateAppearance("fontSize", value);
+                updateSettings("fontSize", value);
                 document.documentElement.style.setProperty(
                   "--font-scale",
                   String(value)

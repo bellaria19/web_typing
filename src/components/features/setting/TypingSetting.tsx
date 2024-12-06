@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useSettingStore } from "@/store/settingStore";
 
 export const TypingSetting = () => {
-  const { settings, updateBehavior } = useSettingStore();
+  const { settings, updateSettings } = useSettingStore();
   const { t } = useTranslation();
 
   return (
@@ -32,14 +32,14 @@ export const TypingSetting = () => {
         </div>
         <ButtonGroup>
           <SettingButton
-            $isSelected={!settings.behavior.blindMode}
-            onClick={() => updateBehavior("blindMode", false)}
+            $isSelected={!settings.blindMode}
+            onClick={() => updateSettings("blindMode", false)}
           >
             {t("SETTINGS.OPTIONS.BLIND_MODE.BUTTONS.OFF")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.blindMode}
-            onClick={() => updateBehavior("blindMode", true)}
+            $isSelected={settings.blindMode}
+            onClick={() => updateSettings("blindMode", true)}
           >
             {t("SETTINGS.OPTIONS.BLIND_MODE.BUTTONS.ON")}
           </SettingButton>
@@ -58,26 +58,26 @@ export const TypingSetting = () => {
         </div>
         <ButtonGroup>
           <SettingButton
-            $isSelected={settings.behavior.quickRestart === "off"}
-            onClick={() => updateBehavior("quickRestart", "off")}
+            $isSelected={settings.quickRestart === "off"}
+            onClick={() => updateSettings("quickRestart", "off")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.OFF")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.quickRestart === "tab"}
-            onClick={() => updateBehavior("quickRestart", "tab")}
+            $isSelected={settings.quickRestart === "tab"}
+            onClick={() => updateSettings("quickRestart", "tab")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.TAB")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.quickRestart === "esc"}
-            onClick={() => updateBehavior("quickRestart", "esc")}
+            $isSelected={settings.quickRestart === "esc"}
+            onClick={() => updateSettings("quickRestart", "esc")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.ESC")}
           </SettingButton>
           <SettingButton
-            $isSelected={settings.behavior.quickRestart === "enter"}
-            onClick={() => updateBehavior("quickRestart", "enter")}
+            $isSelected={settings.quickRestart === "enter"}
+            onClick={() => updateSettings("quickRestart", "enter")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.ENTER")}
           </SettingButton>

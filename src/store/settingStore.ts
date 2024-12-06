@@ -7,17 +7,9 @@ interface SettingState {
   isLoaded: boolean;
   loadUserSettings: (userId: string) => Promise<void>;
   saveUserSettings: (userId: string) => Promise<void>;
-  updateBehavior: <K extends keyof TypingSettings["behavior"]>(
+  updateSettings: <K extends keyof TypingSettings>(
     key: K,
-    value: TypingSettings["behavior"][K]
-  ) => void;
-  updateAppearance: <K extends keyof TypingSettings["appearance"]>(
-    key: K,
-    value: TypingSettings["appearance"][K]
-  ) => void;
-  updateSound: <K extends keyof TypingSettings["sound"]>(
-    key: K,
-    value: TypingSettings["sound"][K]
+    value: TypingSettings[K]
   ) => void;
 }
 
@@ -29,7 +21,7 @@ const applySettings = (settings: TypingSettings) => {
   // 폰트 크기 적용
   document.documentElement.style.setProperty(
     "--font-scale",
-    String(settings.appearance.fontSize)
+    String(settings.fontSize)
   );
 
   // 다른 설정들도 필요한 경우 여기에 추가
@@ -37,23 +29,17 @@ const applySettings = (settings: TypingSettings) => {
 
 export const useSettingStore = create<SettingState>((set, get) => ({
   settings: {
-    behavior: {
-      difficulty: "normal",
-      quickRestart: "off",
-      blindMode: false,
-      confidenceMode: "off",
-      indicateTypos: "off",
-    },
-    appearance: {
-      fontSize: 1.0,
-      smoothCaret: true,
-      caretStyle: "block",
-    },
-    sound: {
-      volume: 50,
-      clickSound: "off",
-      errorSound: "off",
-    },
+    difficulty: "normal",
+    quickRestart: "off",
+    blindMode: false,
+    confidenceMode: "off",
+    indicateTypos: "off",
+    fontSize: 1.0,
+    smoothCaret: true,
+    caretStyle: "block",
+    volume: 50,
+    clickSound: "off",
+    errorSound: "off",
   },
   isLoaded: false,
 
@@ -70,42 +56,18 @@ export const useSettingStore = create<SettingState>((set, get) => ({
     await settingsService.saveUserSettings(userId, settings);
   },
 
-  updateBehavior: (key, value) => {
-    set((state) => ({
-      settings: {
-        ...state.settings,
-        behavior: {
-          ...state.settings.behavior,
-          [key]: value,
-        },
-      },
-    }));
-  },
-
-  updateAppearance: (key, value) => {
+  updateSettings: <K extends keyof TypingSettings>(
+    key: K,
+    value: TypingSettings[K]
+  ) => {
     set((state) => {
       const newSettings = {
         ...state.settings,
-        appearance: {
-          ...state.settings.appearance,
-          [key]: value,
-        },
+        [key]: value,
       };
       applySettings(newSettings);
       return { settings: newSettings };
     });
-  },
-
-  updateSound: (key, value) => {
-    set((state) => ({
-      settings: {
-        ...state.settings,
-        sound: {
-          ...state.settings.sound,
-          [key]: value,
-        },
-      },
-    }));
   },
 }));
 

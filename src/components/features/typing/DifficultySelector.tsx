@@ -3,7 +3,7 @@ import { SelectorButton, SelectorContainer } from "@/styles/typing.styles";
 import { Difficulty } from "@/types/typing";
 
 const DifficultySelector = () => {
-  const { settings, updateBehavior } = useSettingStore();
+  const { settings, updateSettings } = useSettingStore();
 
   const difficulties: Difficulty[] = ["normal", "expert", "master"];
 
@@ -13,8 +13,8 @@ const DifficultySelector = () => {
         {difficulties.map((difficulty) => (
           <SelectorButton
             key={difficulty}
-            $isSelected={settings.behavior.difficulty === difficulty}
-            onClick={() => updateBehavior("difficulty", difficulty)}
+            $isSelected={settings.difficulty === difficulty}
+            onClick={() => updateSettings("difficulty", difficulty)}
           >
             {difficulty}
           </SelectorButton>
