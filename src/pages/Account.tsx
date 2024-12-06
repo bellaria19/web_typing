@@ -13,8 +13,6 @@ const Account = () => {
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    console.log("user", user);
-    console.log("loading", loading);
     if (!user && !loading) {
       navigateTo(ROUTES.LOGIN);
     }
@@ -23,13 +21,11 @@ const Account = () => {
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
-      console.log("user", user);
       navigateTo(ROUTES.LOGIN);
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
-  // if (loading) return <Wrapper>Loading...</Wrapper>;
 
   return (
     <Wrapper>

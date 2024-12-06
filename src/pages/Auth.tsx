@@ -57,21 +57,28 @@ const Auth = () => {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email: signUpData.email,
-      password: signUpData.password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: signUpData.email,
+        password: signUpData.password,
+      });
 
-    if (error) {
-      console.log(error);
-      alert("회원가입에 실패하였습니다.");
-    } else {
+      if (error) throw error;
+
       if (data.user) {
         const { settings } = useSettingStore.getState();
-        await settingsService.saveUserSettings(data.user.id, settings);
+        try {
+          await settingsService.saveUserSettings(data.user.id, settings);
+          alert("회원가입에 성공하였습니다. 이메일을 확인해주세요.");
+          navigateTo(ROUTES.LOGIN);
+        } catch (settingsError) {
+          console.error("설정 저장 중 오류 발생:", settingsError);
+          alert("회원가입은 완료되었으나, 초기 설정 저장에 실패했습니다.");
+        }
       }
-      alert("회원가입에 성공하였습니다. 이메일을 확인해주세요.");
-      navigateTo(ROUTES.LOGIN);
+    } catch (error) {
+      console.error(error);
+      alert("회원가입에 실패하였습니다.");
     }
   };
 
