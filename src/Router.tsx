@@ -1,10 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Root from "./Root.tsx";
 import Typing from "@/pages/Typing.tsx";
-import Settings from "@/pages/Setting.tsx";
-import Upload from "@/pages/Upload.tsx";
 import Account from "@/pages/Account.tsx";
 import Login from "@/pages/Auth.tsx";
+// import Settings from "@/pages/Setting.tsx";
+// import Upload from "@/pages/Upload.tsx";
+import ProtectedSettings from "@/components/protected/ProtectedSettings";
+import ProtectedUpload from "@/components/protected/ProtectedUpload";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +23,13 @@ const router = createBrowserRouter([
       },
       {
         path: "settings",
-        element: <Settings />,
+        element: <ProtectedSettings />,
+        // element: <Settings />,
       },
       {
         path: "upload",
-        element: <Upload />,
+        element: <ProtectedUpload />,
+        // element: <Upload />,
       },
       {
         path: "account",
