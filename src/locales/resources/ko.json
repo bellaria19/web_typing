@@ -1,6 +1,10 @@
 {
   "TYPING": {
-    "SETTING": "타자 연습 설정"
+    "SETTING": "타자 연습 설정",
+    "WPM_CPM": "WPM / CPM",
+    "WPM": "WPM",
+    "CPM": "CPM",
+    "ACCURACY": "정확도"
   },
   "COMMON": {
     "LOADING": "로딩 중...",

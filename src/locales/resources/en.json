@@ -1,6 +1,10 @@
 {
   "TYPING": {
-    "SETTING": "Typing Setting"
+    "SETTING": "Typing Setting",
+    "WPM_CPM": "WPM / CPM",
+    "WPM": "WPM",
+    "CPM": "CPM",
+    "ACCURACY": "Accuracy"
   },
   "COMMON": {
     "LOADING": "Loading...",
