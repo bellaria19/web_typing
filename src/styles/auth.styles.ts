@@ -26,4 +26,9 @@ export const Button = styled.button`
   padding: ${foundations.spacing.sm};
   border: 1px solid #eee;
   border-radius: ${foundations.radius.sm};
+
+  &:active {
+    background-color: #ddd;
+    border-color: #ccc;
+  }
 `;

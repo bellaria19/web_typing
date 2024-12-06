@@ -1,15 +1,24 @@
 import styled from "styled-components";
+import { RestartAlt } from "styled-icons/material";
 
 export const Container = styled.div`
-  display: block;
   gap: 1rem;
   margin-bottom: 2rem;
+`;
+
+export const SelectorContainer = styled.div`
+  padding: 0.5rem;
+  border: 1px solid ${({ theme }) => theme.subColor};
+  border-radius: 4px;
+  min-width: 150px;
 `;
 
 export const DisplayBox = styled.div`
   border: 1px solid ${({ theme }) => theme.subColor};
   border-radius: 4px;
   padding: 1rem;
+  min-width: 150px;
+  height: 100px;
 `;
 
 export const DisplayLabel = styled.div`
@@ -22,6 +31,7 @@ export const DisplayValue = styled.div`
   color: ${({ theme }) => theme.mainColor};
   font-size: 1.5rem;
   font-weight: bold;
+  text-align: right;
 `;
 
 export const SelectorButton = styled.button<{ $isSelected: boolean }>`
@@ -66,4 +76,23 @@ export const Char = styled.span<{
       border-left-color: transparent;
     }
   }
+`;
+
+export const TypingArea = styled.textarea`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+`;
+
+export const RestartButton = styled.button`
+  display: flex;
+`;
+
+export const RestartIcon = styled(RestartAlt)`
+  width: 2rem;
+  height: 2rem;
+  color: ${({ theme }) => theme.mainColor};
 `;
