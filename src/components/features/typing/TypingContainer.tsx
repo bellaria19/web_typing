@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { Container } from "@/styles/typing.styles";
 import TextDisplay from "./TextDisplay";
-import TypingInput from "./TypingInput";
+import TestInput from "./TypingInput";
 import { useTypingStore } from "@/store/typingStore";
 import { useSettingStore } from "@/store/settingStore";
 
@@ -44,10 +44,10 @@ const TypingContainer = () => {
   //   }, [isFinished, settings.behavior.quickRestart, handleRestart]);
 
   return (
-    <Container>
+    <>
       <TextDisplay />
-      <TypingInput />
-    </Container>
+      <TestInput />
+    </>
   );
 };
 

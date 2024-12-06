@@ -1,14 +1,14 @@
 import { useTypingStore } from "@/store/typingStore";
-import { Container, SelectorButton } from "@/styles/typing.styles";
+import { SelectorButton, SelectorContainer } from "@/styles/typing.styles";
 import { TestMode } from "@/types/typing";
 
 const TypeSelector = () => {
   const { mode, setMode } = useTypingStore();
 
-  const modes: TestMode[] = ["words", "short", "long", "quote", "proverb"];
+  const modes: TestMode[] = ["words", "short", "long"];
 
   return (
-    <Container>
+    <SelectorContainer>
       <div className="flex items-center gap-2">
         {modes.map((testMode) => (
           <SelectorButton
@@ -20,7 +20,7 @@ const TypeSelector = () => {
           </SelectorButton>
         ))}
       </div>
-    </Container>
+    </SelectorContainer>
   );
 };
 

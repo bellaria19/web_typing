@@ -1,17 +1,8 @@
 import { useTypingStore } from "@/store/typingStore";
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
+import { TypingArea } from "@/styles/typing.styles";
 
-const Input = styled.textarea`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  pointer-events: none;
-`;
-
-const TypingInput = () => {
+const TestInput = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { isFinished, start, handleInput } = useTypingStore();
 
@@ -40,7 +31,7 @@ const TypingInput = () => {
     return () => window.removeEventListener("click", focusInput);
   }, []);
 
-  return <Input ref={inputRef} />;
+  return <TypingArea ref={inputRef} />;
 };
 
-export default TypingInput;
+export default TestInput;

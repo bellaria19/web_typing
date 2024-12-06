@@ -1,5 +1,5 @@
 import { useTypingStore } from "@/store/typingStore";
-import { Container, SelectorButton } from "@/styles/typing.styles";
+import { SelectorButton, SelectorContainer } from "@/styles/typing.styles";
 
 const TimeSelector = () => {
   const { timeLimit, setTimeLimit } = useTypingStore();
@@ -7,7 +7,7 @@ const TimeSelector = () => {
   const timeLimits = [15, 30, 45, 60];
 
   return (
-    <Container>
+    <SelectorContainer>
       <div className="flex items-center gap-2">
         {timeLimits.map((time) => (
           <SelectorButton
@@ -19,7 +19,7 @@ const TimeSelector = () => {
           </SelectorButton>
         ))}
       </div>
-    </Container>
+    </SelectorContainer>
   );
 };
 
