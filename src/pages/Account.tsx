@@ -2,21 +2,14 @@ import { Wrapper } from "@/styles/common.styles";
 import { UserSection } from "@/components/features/account/UserSection";
 import { StatsSection } from "@/components/features/account/StatsSection";
 import { HistorySection } from "@/components/features/account/HistorySection";
-import { useAuth } from "@/hooks/useAuth";
 import { useNavigation } from "@/hooks/useNavigation";
-import { ROUTES } from "@/constants/routes";
-import { useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supabaseClient";
+import { ROUTES } from "@/constants/routes";
 
 const Account = () => {
   const { navigateTo } = useNavigation();
-  const { user, loading } = useAuth();
-
-  useEffect(() => {
-    if (!user && !loading) {
-      navigateTo(ROUTES.LOGIN);
-    }
-  }, [user, loading, navigateTo]);
+  const { user } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -29,7 +22,7 @@ const Account = () => {
 
   return (
     <Wrapper>
-      <UserSection handleLogout={handleLogout} />
+      <UserSection handleLogout={handleLogout} user={user} />
       <hr className="py-6" />
       <StatsSection />
       <hr className="py-6" />

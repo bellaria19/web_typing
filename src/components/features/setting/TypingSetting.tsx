@@ -8,24 +8,28 @@ import {
 } from "@/styles/setting.styles";
 import { useTranslation } from "react-i18next";
 import { useSettingStore } from "@/store/settingStore";
+import { useAuth } from "@/hooks/useAuth";
+import { TypingSettings } from "@/types/setting";
 
 export const TypingSetting = () => {
   const { settings, updateSettings } = useSettingStore();
   const { t } = useTranslation();
+  const { user } = useAuth();
+
+  const handleUpdateSettings = <K extends keyof TypingSettings>(
+    key: K,
+    value: TypingSettings[K]
+  ) => {
+    updateSettings(key, value, user?.id);
+  };
 
   return (
     <Container>
-      <Title>
-        <i className="fas fa-chevron-down" />
-        {t("SETTINGS.SECTIONS.TYPING")}
-      </Title>
+      <Title>{t("SETTINGS.SECTIONS.TYPING")}</Title>
 
       <OptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-eye-slash" />
-            {t("SETTINGS.OPTIONS.BLIND_MODE.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.BLIND_MODE.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.BLIND_MODE.DESCRIPTION")}
           </OptionDescription>
@@ -33,13 +37,13 @@ export const TypingSetting = () => {
         <ButtonGroup>
           <SettingButton
             $isSelected={!settings.blindMode}
-            onClick={() => updateSettings("blindMode", false)}
+            onClick={() => handleUpdateSettings("blindMode", false)}
           >
             {t("SETTINGS.OPTIONS.BLIND_MODE.BUTTONS.OFF")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.blindMode}
-            onClick={() => updateSettings("blindMode", true)}
+            onClick={() => handleUpdateSettings("blindMode", true)}
           >
             {t("SETTINGS.OPTIONS.BLIND_MODE.BUTTONS.ON")}
           </SettingButton>
@@ -48,10 +52,7 @@ export const TypingSetting = () => {
 
       <OptionGrid>
         <div>
-          <OptionLabel>
-            <i className="fas fa-redo-alt" />
-            {t("SETTINGS.OPTIONS.QUICK_RESTART.LABEL")}
-          </OptionLabel>
+          <OptionLabel>{t("SETTINGS.OPTIONS.QUICK_RESTART.LABEL")}</OptionLabel>
           <OptionDescription>
             {t("SETTINGS.OPTIONS.QUICK_RESTART.DESCRIPTION")}
           </OptionDescription>
@@ -59,25 +60,25 @@ export const TypingSetting = () => {
         <ButtonGroup>
           <SettingButton
             $isSelected={settings.quickRestart === "off"}
-            onClick={() => updateSettings("quickRestart", "off")}
+            onClick={() => handleUpdateSettings("quickRestart", "off")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.OFF")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.quickRestart === "tab"}
-            onClick={() => updateSettings("quickRestart", "tab")}
+            onClick={() => handleUpdateSettings("quickRestart", "tab")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.TAB")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.quickRestart === "esc"}
-            onClick={() => updateSettings("quickRestart", "esc")}
+            onClick={() => handleUpdateSettings("quickRestart", "esc")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.ESC")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.quickRestart === "enter"}
-            onClick={() => updateSettings("quickRestart", "enter")}
+            onClick={() => handleUpdateSettings("quickRestart", "enter")}
           >
             {t("SETTINGS.OPTIONS.QUICK_RESTART.BUTTONS.ENTER")}
           </SettingButton>

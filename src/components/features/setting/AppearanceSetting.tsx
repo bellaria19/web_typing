@@ -12,11 +12,21 @@ import {
 } from "@/styles/setting.styles";
 import themes from "@/assets/_theme.json";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@/hooks/useAuth";
+import { TypingSettings } from "@/types/setting";
 
 export const AppearanceSetting = () => {
   const { t } = useTranslation();
   const { settings, updateSettings } = useSettingStore();
   const { currentTheme, setTheme } = useThemeStore();
+  const { user } = useAuth();
+
+  const handleUpdateSettings = <K extends keyof TypingSettings>(
+    key: K,
+    value: TypingSettings[K]
+  ) => {
+    updateSettings(key, value, user?.id);
+  };
 
   return (
     <Container>
@@ -36,7 +46,7 @@ export const AppearanceSetting = () => {
             onChange={(e) => {
               const value = Number(e.target.value);
               if (value >= 0.5 && value <= 3) {
-                updateSettings("fontSize", value);
+                handleUpdateSettings("fontSize", value);
                 document.documentElement.style.setProperty(
                   "--font-scale",
                   String(value)

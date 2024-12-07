@@ -8,13 +8,23 @@ import {
   ButtonGroup,
 } from "@/styles/setting.styles";
 import { useTranslation } from "react-i18next";
+import { TypingSettings } from "@/types/setting";
+import { useAuth } from "@/hooks/useAuth";
 
 export const BasicSetting = () => {
-  const { t, i18n } = useTranslation();
   const { settings, updateSettings } = useSettingStore();
+  const { t, i18n } = useTranslation();
+  const { user } = useAuth();
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
+  };
+
+  const handleSettingUpdate = <K extends keyof TypingSettings>(
+    key: K,
+    value: TypingSettings[K]
+  ) => {
+    updateSettings(key, value, user?.id);
   };
 
   return (
@@ -58,19 +68,19 @@ export const BasicSetting = () => {
         <ButtonGroup>
           <SettingButton
             $isSelected={settings.difficulty === "normal"}
-            onClick={() => updateSettings("difficulty", "normal")}
+            onClick={() => handleSettingUpdate("difficulty", "normal")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.NORMAL")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.difficulty === "expert"}
-            onClick={() => updateSettings("difficulty", "expert")}
+            onClick={() => handleSettingUpdate("difficulty", "expert")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.EXPERT")}
           </SettingButton>
           <SettingButton
             $isSelected={settings.difficulty === "master"}
-            onClick={() => updateSettings("difficulty", "master")}
+            onClick={() => handleSettingUpdate("difficulty", "master")}
           >
             {t("SETTINGS.OPTIONS.DIFFICULTY.BUTTONS.MASTER")}
           </SettingButton>

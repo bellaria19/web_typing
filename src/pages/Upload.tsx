@@ -3,6 +3,7 @@ import ContentField from "@/components/features/upload/ContentField";
 import DescriptionField from "@/components/features/upload/DescriptionField";
 import TypeField from "@/components/features/upload/TypeField";
 import UploadHeader from "@/components/features/upload/UploadHeader";
+import { useAuth } from "@/hooks/useAuth";
 import { Wrapper } from "@/styles/common.styles";
 import { UploadBtn, UploadContainer } from "@/styles/upload.styles";
 import { Category, UploadFormData, UploadType } from "@/types/upload";
@@ -17,6 +18,7 @@ const Upload = () => {
   });
   const [type, setType] = useState<UploadType>();
   const [category, setCategory] = useState<Category | undefined>();
+  const { user } = useAuth();
 
   const handleUpload = async (e: FormEvent) => {
     e.preventDefault();
