@@ -1,11 +1,11 @@
-import { RestartButton, RestartIcon } from "@/styles/typing.styles";
+import { ReloadButton, ReloadIcon } from "@/styles/typing.styles";
 
-const RestartBtn = () => {
+const ReloadBtn = ({ onClick }: { onClick: () => void }) => {
   return (
-    <RestartButton>
-      <RestartIcon />
-    </RestartButton>
+    <ReloadButton onClick={onClick}>
+      <ReloadIcon />
+    </ReloadButton>
   );
 };
 
-export default RestartBtn;
+export default ReloadBtn;

@@ -7,12 +7,14 @@ import TypingContainer from "@/components/features/typing/TypingContainer";
 import { Wrapper } from "@/styles/common.styles";
 import WpmDisplay from "@/components/features/typing/WpmDisplay";
 import CpmDisplay from "@/components/features/typing/CpmDisplay";
-import RestartBtn from "@/components/features/typing/RestartBtn";
+import ReloadBtn from "@/components/features/typing/RestartBtn";
 import { useTypingStore } from "@/store/typingStore";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const Typing = () => {
-  const { wpm, cpm, accuracy, calculate } = useTypingStore();
+  const { wpm, cpm, accuracy, calculate, loadContent } = useTypingStore();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -21,6 +23,10 @@ const Typing = () => {
 
     return () => clearInterval(intervalId);
   }, [calculate]);
+
+  const handleReload = () => {
+    loadContent(i18n.language);
+  };
 
   return (
     <Wrapper>
@@ -34,7 +40,7 @@ const Typing = () => {
         <WpmDisplay wpm={wpm} />
         <CpmDisplay cpm={cpm} />
         <AccuracyDisplay accuracy={accuracy} />
-        <RestartBtn />
+        <ReloadBtn onClick={handleReload} />
       </div>
       <TypingContainer />
     </Wrapper>

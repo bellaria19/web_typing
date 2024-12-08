@@ -91,11 +91,11 @@ export const TypingArea = styled.textarea`
   pointer-events: none;
 `;
 
-export const RestartButton = styled.button`
+export const ReloadButton = styled.button`
   display: flex;
 `;
 
-export const RestartIcon = styled(RestartAlt)`
+export const ReloadIcon = styled(RestartAlt)`
   width: 2rem;
   height: 2rem;
   color: ${({ theme }) => theme.mainColor};
