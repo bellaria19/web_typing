@@ -2,7 +2,7 @@ import { useTypingStore } from "@/store/typingStore";
 import { SelectorButton, SelectorContainer } from "@/styles/typing.styles";
 
 const TimeSelector = () => {
-  const { timeLimit, setTimeLimit } = useTypingStore();
+  const { time: timeLimit, setTimeLimit } = useTypingStore();
 
   const timeLimits = [15, 30, 45, 60];
 

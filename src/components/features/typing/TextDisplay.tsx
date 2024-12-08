@@ -2,7 +2,7 @@ import { Char, TextWrapper } from "@/styles/typing.styles";
 import { useTypingStore } from "@/store/typingStore";
 
 const TextDisplay = () => {
-  const { text, currentIndex, errorHistory } = useTypingStore();
+  const { text, currentIndex, errorIndices } = useTypingStore();
 
   return (
     <TextWrapper>
@@ -13,7 +13,7 @@ const TextDisplay = () => {
             index === currentIndex
               ? "current"
               : index < currentIndex
-              ? errorHistory.some((error) => error.words.includes(text[index]))
+              ? errorIndices.includes(index)
                 ? "incorrect"
                 : "correct"
               : "waiting"

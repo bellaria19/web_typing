@@ -1,47 +1,21 @@
-import { useEffect, useCallback } from "react";
-import { Container } from "@/styles/typing.styles";
+import { useEffect } from "react";
 import TextDisplay from "./TextDisplay";
-import TestInput from "./TypingInput";
+import TestInput from "./TestInput";
 import { useTypingStore } from "@/store/typingStore";
-import { useSettingStore } from "@/store/settingStore";
+import { useTranslation } from "react-i18next";
 
 const TypingContainer = () => {
-  const { loadContent, reset, isFinished, saveRecord } = useTypingStore();
-  const { settings } = useSettingStore();
+  const { loadContent, reset } = useTypingStore();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
-    loadContent();
+    const initializeContent = async () => {
+      await loadContent(i18n.language);
+    };
+
+    initializeContent();
     return () => reset();
-  }, [loadContent, reset]);
-
-  useEffect(() => {
-    if (isFinished) {
-      saveRecord();
-    }
-  }, [isFinished, saveRecord]);
-
-  //   const handleRestart = useCallback(() => {
-  //     loadContent();
-  //   }, [loadContent]);
-
-  //   useEffect(() => {
-  //     const handleKeyDown = (e: KeyboardEvent) => {
-  //       if (!isFinished) return;
-
-  //       const quickRestart = settings.behavior.quickRestart;
-  //       if (
-  //         (quickRestart === "tab" && e.key === "Tab") ||
-  //         (quickRestart === "esc" && e.key === "Escape") ||
-  //         (quickRestart === "enter" && e.key === "Enter")
-  //       ) {
-  //         e.preventDefault();
-  //         handleRestart();
-  //       }
-  //     };
-
-  //     window.addEventListener("keydown", handleKeyDown);
-  //     return () => window.removeEventListener("keydown", handleKeyDown);
-  //   }, [isFinished, settings.behavior.quickRestart, handleRestart]);
+  }, [i18n.language, loadContent, reset]);
 
   return (
     <>

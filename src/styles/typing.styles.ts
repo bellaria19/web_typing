@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { foundations } from "@/styles/foundation";
 import { RestartAlt } from "styled-icons/material";
 
 export const Container = styled.div`
@@ -42,7 +43,7 @@ export const SelectorButton = styled.button<{ $isSelected: boolean }>`
 `;
 
 export const TextWrapper = styled.div`
-  font-size: 1.5rem;
+  font-size: ${foundations.typography.size.lg};
   line-height: 1.5;
   white-space: pre-wrap;
   margin: 2rem 0;

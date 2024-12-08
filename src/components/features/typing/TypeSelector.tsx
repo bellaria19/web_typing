@@ -5,7 +5,7 @@ import { TestMode } from "@/types/typing";
 const TypeSelector = () => {
   const { mode, setMode } = useTypingStore();
 
-  const modes: TestMode[] = ["word", "short", "long"];
+  const modes: TestMode[] = ["time", "word", "short", "long"];
 
   return (
     <SelectorContainer>

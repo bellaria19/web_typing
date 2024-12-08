@@ -1,4 +1,4 @@
-export type TestMode = "words" | "short" | "long" | "quote" | "proverb";
+export type TestMode = "time" | "word" | "short" | "long";
 export type Difficulty = "normal" | "expert" | "master";
 
 export interface Quote {
@@ -19,7 +19,6 @@ export interface TypingText {
 export interface TypingRecord {
   id: number;
   user_id: string;
-  text_id: number;
   wpm: number;
   cpm: number;
   accuracy: number;
@@ -45,4 +44,12 @@ export interface TypingLong {
   content: string;
   description: string;
   category: string;
+}
+
+export interface TypingRecord {
+  text: string;
+  mistakes: number;
+  wpm: number;
+  cpm: number;
+  accuracy: number;
 }
