@@ -6,10 +6,19 @@ import { useNavigation } from "@/hooks/useNavigation";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supabaseClient";
 import { ROUTES } from "@/constants/routes";
+import { useEffect } from "react";
 
 const Account = () => {
   const { navigateTo } = useNavigation();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+    console.log(loading);
+    if (!user && !loading) {
+      navigateTo(ROUTES.LOGIN);
+    }
+  }, [user, loading, navigateTo]);
 
   const handleLogout = async () => {
     try {

@@ -7,10 +7,17 @@ import {
   Nav,
   NavButton,
 } from "@/styles/header.styles";
+import { useEffect } from "react";
 
 export const Header = () => {
   const { navigateTo } = useNavigation();
-  const { user } = useAuth();
+  const { isAuthenticated, sessionExpiresIn } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log(`세션 유효 시간: ${Math.floor(sessionExpiresIn / 60)}분`);
+    }
+  }, [isAuthenticated, sessionExpiresIn]);
 
   return (
     <HeaderWrapper>
@@ -23,7 +30,7 @@ export const Header = () => {
           Setting
         </NavButton>
         <NavButton onClick={() => navigateTo(ROUTES.UPLOAD)}>Upload</NavButton>
-        {user ? (
+        {isAuthenticated ? (
           <NavButton onClick={() => navigateTo(ROUTES.ACCOUNT)}>
             Account
           </NavButton>

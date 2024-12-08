@@ -8,6 +8,7 @@ import { LoginFormData, SignUpFormData } from "@/types/auth";
 import { useState } from "react";
 import { useSettingStore } from "@/store/settingStore";
 import { settingsService } from "@/services/settingService";
+import { useSessionStore } from "@/store/sessionStore";
 
 const Auth = () => {
   const { navigateTo } = useNavigation();
@@ -21,6 +22,7 @@ const Auth = () => {
     confirmPassword: "",
   });
   const { loadUserSettings } = useSettingStore();
+  const { setSession } = useSessionStore();
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -42,6 +44,8 @@ const Auth = () => {
       alert("로그인에 실패하였습니다.");
     } else {
       if (data.user) {
+        console.log(data.session);
+        setSession(data.session);
         await loadUserSettings(data.user.id);
       }
       alert("로그인에 성공하였습니다.");

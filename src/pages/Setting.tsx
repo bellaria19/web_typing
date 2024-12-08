@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AppearanceSetting } from "@/components/features/setting/AppearanceSetting";
 import { BasicSetting } from "@/components/features/setting/BasicSetting";
 import { TypingSetting } from "@/components/features/setting/TypingSetting";
