@@ -5,6 +5,10 @@ export interface UploadFormData {
   type: UploadType;
 }
 
+export interface UploadData extends UploadFormData {
+  user_id: string;
+}
+
 export interface CategoryLabel {
   ko: string;
   en: string;

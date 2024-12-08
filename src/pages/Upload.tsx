@@ -8,6 +8,7 @@ import { Wrapper } from "@/styles/common.styles";
 import { UploadBtn, UploadContainer } from "@/styles/upload.styles";
 import { Category, UploadFormData, UploadType } from "@/types/upload";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { uploadService } from "@/services/uploadService";
 
 const Upload = () => {
   const [uploadData, setUploadData] = useState<UploadFormData>({
@@ -22,6 +23,44 @@ const Upload = () => {
 
   const handleUpload = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!user) {
+      alert("로그인이 필요한 기능입니다.");
+      return;
+    }
+
+    if (!uploadData.content || !uploadData.description || !category || !type) {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+
+    if (type.value !== "short" && type.value !== "long") {
+      alert("현재 short와 long 타입만 업로드 가능합니다.");
+      return;
+    }
+
+    const success = await uploadService.uploadContent({
+      content: uploadData.content,
+      description: uploadData.description,
+      category: category,
+      type: type,
+      user_id: user.id,
+    });
+
+    if (success) {
+      alert("업로드가 완료되었습니다.");
+      // 입력 필드 초기화
+      setUploadData({
+        content: "",
+        description: "",
+        category: undefined,
+        type: { value: "word", label: "Word" },
+      });
+      setCategory(undefined);
+      setType(undefined);
+    } else {
+      alert("업로드 중 오류가 발생했습니다.");
+    }
   };
 
   const handleCategory = (category: Category) => {
