@@ -4,7 +4,8 @@
     "WPM_CPM": "WPM / CPM",
     "WPM": "WPM",
     "CPM": "CPM",
-    "ACCURACY": "정확도"
+    "ACCURACY": "정확도",
+    "FOCUS_GUIDE": "클릭하거나 아무 키나 눌러서 시작하세요"
   },
   "COMMON": {
     "LOADING": "로딩 중...",

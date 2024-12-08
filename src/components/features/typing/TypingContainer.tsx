@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TextDisplay from "./TextDisplay";
 import TestInput from "./TestInput";
 import { useTypingStore } from "@/store/typingStore";
 import { useTranslation } from "react-i18next";
+import { BlurOverlay, TypingContainerWrapper } from "@/styles/typing.styles";
 
 const TypingContainer = () => {
   const { loadContent, reset } = useTypingStore();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [isBlurred, setIsBlurred] = useState(true);
 
   useEffect(() => {
     const initializeContent = async () => {
@@ -17,11 +19,18 @@ const TypingContainer = () => {
     return () => reset();
   }, [i18n.language, loadContent, reset]);
 
+  const handleContainerClick = () => {
+    setIsBlurred(false);
+  };
+
   return (
-    <>
-      <TextDisplay />
-      <TestInput />
-    </>
+    <TypingContainerWrapper onClick={handleContainerClick}>
+      {isBlurred && <BlurOverlay>{t("TYPING.FOCUS_GUIDE")}</BlurOverlay>}
+      <div style={{ filter: isBlurred ? "blur(5px)" : "none" }}>
+        <TextDisplay />
+        <TestInput />
+      </div>
+    </TypingContainerWrapper>
   );
 };
 

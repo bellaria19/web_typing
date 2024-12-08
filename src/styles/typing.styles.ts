@@ -42,11 +42,14 @@ export const SelectorButton = styled.button<{ $isSelected: boolean }>`
   font-weight: ${({ $isSelected }) => ($isSelected ? "bold" : "normal")};
 `;
 
-export const TextWrapper = styled.div`
-  font-size: ${foundations.typography.size.lg};
+export const TextWrapper = styled.div<{ $isFocused: boolean }>`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
   line-height: 1.5;
-  white-space: pre-wrap;
-  margin: 2rem 0;
+  font-size: calc(1.2rem * var(--font-scale));
+  transition: filter 0.3s ease;
+  filter: ${({ $isFocused }) => ($isFocused ? "none" : "blur(5px)")};
   user-select: none;
 `;
 
@@ -96,4 +99,32 @@ export const RestartIcon = styled(RestartAlt)`
   width: 2rem;
   height: 2rem;
   color: ${({ theme }) => theme.mainColor};
+`;
+
+export const TypingContainerWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+`;
+
+export const BlurOverlay = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: ${({ theme }) => theme.textColor};
+  font-size: ${foundations.typography.size.xl};
+  text-align: center;
+  user-select: none;
+
+  @keyframes fadeInOut {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
 `;
