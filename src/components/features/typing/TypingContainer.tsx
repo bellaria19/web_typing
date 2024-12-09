@@ -28,7 +28,7 @@ const TypingContainer = () => {
       {isBlurred && <BlurOverlay>{t("TYPING.FOCUS_GUIDE")}</BlurOverlay>}
       <div style={{ filter: isBlurred ? "blur(5px)" : "none" }}>
         <TextDisplay />
-        <TestInput />
+        <TestInput isBlurred={isBlurred} />
       </div>
     </TypingContainerWrapper>
   );

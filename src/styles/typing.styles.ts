@@ -46,11 +46,24 @@ export const TextWrapper = styled.div<{ $isFocused: boolean }>`
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
-  line-height: 1.5;
+  line-height: 2;
   font-size: calc(1.2rem * var(--font-scale));
-  transition: filter 0.3s ease;
-  filter: ${({ $isFocused }) => ($isFocused ? "none" : "blur(5px)")};
+  transition: all 0.3s ease;
   user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 150px;
+  overflow: hidden;
+`;
+
+export const LineWrapper = styled.div<{
+  $isNext?: boolean;
+  $isVisible?: boolean;
+}>`
+  opacity: ${({ $isNext }) => ($isNext ? 0.5 : 1)};
+  transform: translateY(${({ $isVisible }) => ($isVisible ? "0" : "-100%")});
+  transition: all 0.3s ease;
 `;
 
 export const Char = styled.span<{
@@ -104,7 +117,10 @@ export const ReloadIcon = styled(RestartAlt)`
 export const TypingContainerWrapper = styled.div`
   position: relative;
   width: 100%;
+  min-height: 200px;
   cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.mainColor};
+  padding: 1rem 2rem;
 `;
 
 export const BlurOverlay = styled.div`
@@ -117,7 +133,7 @@ export const BlurOverlay = styled.div`
   font-size: ${foundations.typography.size.xl};
   text-align: center;
   user-select: none;
-
+  animation: fadeInOut 1s infinite;
   @keyframes fadeInOut {
     0%,
     100% {
@@ -127,4 +143,47 @@ export const BlurOverlay = styled.div`
       opacity: 0.8;
     }
   }
+`;
+
+export const BottomTypingArea = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: ${({ theme }) => theme.bgColor};
+  border: 1px solid ${({ theme }) => theme.subColor};
+  border-radius: 4px;
+  margin-top: 2rem;
+`;
+
+export const BottomInput = styled.textarea`
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.textColor};
+  font-size: calc(1.2rem * var(--font-scale));
+  resize: none;
+  outline: none;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.subColor};
+  }
+`;
+
+export const StatusContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;
+
+export const StatusItem = styled.div<{ $active: boolean }>`
+  padding: 0.25rem 0.75rem;
+  border-radius: ${foundations.radius.sm};
+  font-size: ${foundations.typography.size.sm};
+  color: ${({ theme }) => theme.textColor};
+  opacity: ${({ $active }) => ($active ? 1 : 0.5)};
+  transition: all 0.2s ease;
 `;

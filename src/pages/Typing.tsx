@@ -11,6 +11,7 @@ import ReloadBtn from "@/components/features/typing/RestartBtn";
 import { useTypingStore } from "@/store/typingStore";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import KeyboardStatus from "@/components/features/typing/KeyboardStatus";
 
 const Typing = () => {
   const { wpm, cpm, accuracy, calculate, loadContent } = useTypingStore();
@@ -35,13 +36,14 @@ const Typing = () => {
         <TimeSelector />
         <DifficultySelector />
       </div>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-4 mb-24">
         <WpmCpmDisplay wpm={wpm} cpm={cpm} />
         <WpmDisplay wpm={wpm} />
         <CpmDisplay cpm={cpm} />
         <AccuracyDisplay accuracy={accuracy} />
         <ReloadBtn onClick={handleReload} />
       </div>
+      <KeyboardStatus />
       <TypingContainer />
     </Wrapper>
   );
