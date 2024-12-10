@@ -6,7 +6,17 @@ import {
   TypingLong,
 } from "@/types/typing";
 
+/**
+ * 타이핑 관련 서비스
+ * - 타이핑 기록 저장
+ * - 타이핑 연습용 컨텐츠 로드
+ */
 export const typingService = {
+  /**
+   * 사용자의 타이핑 기록을 저장
+   * @param record 저장할 타이핑 기록 데이터
+   * @returns 저장 성공 여부
+   */
   async saveRecord(record: TypingRecord): Promise<boolean> {
     const {
       data: { session },
@@ -29,6 +39,11 @@ export const typingService = {
     }
   },
 
+  /**
+   * 타이핑 연습용 단어 목록을 불러옴
+   * @param wordCount 불러올 단어 개수
+   * @returns 무작위로 섞인 단어 배열
+   */
   async loadWords(wordCount: number): Promise<TypingWord[]> {
     try {
       const { data, error } = await supabase
@@ -49,6 +64,11 @@ export const typingService = {
     }
   },
 
+  /**
+   * 타이핑 연습용 단문 목록을 불러옴
+   * @param shortCount 불러올 단문 개수
+   * @returns 무작위로 섞인 단문 배열
+   */
   async loadShorts(shortCount: number): Promise<TypingShort[]> {
     try {
       const { data, error } = await supabase
@@ -69,6 +89,11 @@ export const typingService = {
     }
   },
 
+  /**
+   * 타이핑 연습용 긴 글 목록을 불러옴
+   * @param longCount 불러올 긴 글 개수
+   * @returns 무작위로 섞인 긴 글 배열
+   */
   async loadLongs(longCount: number): Promise<TypingLong[]> {
     try {
       const { data, error } = await supabase
@@ -90,6 +115,11 @@ export const typingService = {
   },
 };
 
+/**
+ * 배열의 요소를 무작위로 섞는 유틸리티 함수
+ * @param array 섞을 배열
+ * @returns 무작위로 섞인 새로운 배열
+ */
 function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {

@@ -11,14 +11,24 @@ import {
 } from "@/types/typing";
 import { create } from "zustand";
 
+/**
+ * 타이핑 게임 관리를 위한 전역 상태 스토어
+ * - 타이핑 진행 상태 관리
+ * - 성능 측정 및 통계
+ * - 게임 설정 관리
+ */
+
+/**
+ * 문자 수 계산을 위한 인터페이스
+ */
 type CharCount = {
-  spaces: number;
-  correctWordChars: number;
-  allCorrectChars: number;
-  incorrectChars: number;
-  extraChars: number;
-  missedChars: number;
-  correctSpaces: number;
+  spaces: number; // 전체 공백 수
+  correctWordChars: number; // 올바르게 입력된 단어의 문자 수
+  allCorrectChars: number; // 전체 올바른 문자 수
+  incorrectChars: number; // 잘못 입력된 문자 수
+  extraChars: number; // 추가로 입력된 문자 수
+  missedChars: number; // 놓친 문자 수
+  correctSpaces: number; // 올바르게 입력된 공백 수
 };
 
 interface TypingConfig {
@@ -77,6 +87,7 @@ interface TypingConfig {
 }
 
 export const useTypingStore = create<TypingConfig>((set, get) => ({
+  // 초기 상태 설정
   text: "",
   currentIndex: 0,
   isFinished: false,
@@ -120,7 +131,6 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
   checkTestEnd: () => {
     const { mode, timeLimit, startTime, text, currentIndex, isFinished } =
       get();
-
     if (isFinished) return;
 
     // time 모드: 시간 제한 체크
@@ -303,6 +313,11 @@ export function calculateAccuracy(): number {
   return isNaN(acc) ? 100 : acc;
 }
 
+/**
+ * 문자 수 계산 유틸리티 함수
+ * - 한글과 영문을 구분하여 계산
+ * - 정확한 타이핑 통계를 위한 계산 로직
+ */
 const countChars = (
   text: string,
   currentIndex: number,

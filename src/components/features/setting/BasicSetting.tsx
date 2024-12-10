@@ -11,15 +11,20 @@ import { useTranslation } from "react-i18next";
 import { TypingSettings } from "@/types/setting";
 import { useAuth } from "@/hooks/useAuth";
 
+// 기본 설정을 관리하는 컴포넌트
+// - 언어 설정 (한국어/영어)
+// - 난이도 설정 (normal/expert/master)
 export const BasicSetting = () => {
   const { settings, updateSettings } = useSettingStore();
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
 
+  // 언어 변경 핸들러
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
 
+  // 설정 업데이트 핸들러 - 로그인된 사용자의 경우 DB에도 저장
   const handleSettingUpdate = <K extends keyof TypingSettings>(
     key: K,
     value: TypingSettings[K]

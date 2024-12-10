@@ -2,6 +2,12 @@ import { create } from "zustand";
 import { TypingSettings } from "@/types/setting";
 import { settingsService } from "@/services/settingService";
 
+/**
+ * 사용자 설정 관리를 위한 전역 상태 스토어
+ * - 타이핑 관련 설정 관리
+ * - 설정 저장 및 로드
+ * - UI 설정 적용
+ */
 interface SettingState {
   settings: TypingSettings;
   isLoaded: boolean;
@@ -14,6 +20,7 @@ interface SettingState {
 }
 
 const applySettings = (settings: TypingSettings) => {
+  // 폰트 크기 설정 적용
   document.documentElement.style.setProperty(
     "--font-scale",
     String(settings.fontSize)
@@ -22,6 +29,7 @@ const applySettings = (settings: TypingSettings) => {
 };
 
 export const useSettingStore = create<SettingState>((set, get) => ({
+  // 기본 설정값
   settings: {
     difficulty: "normal",
     quickRestart: "off",
@@ -37,6 +45,10 @@ export const useSettingStore = create<SettingState>((set, get) => ({
   },
   isLoaded: false,
 
+  /**
+   * 사용자 설정 로드
+   * @param userId 설정을 로드할 사용자 ID
+   */
   loadUserSettings: async (userId: string) => {
     const settings = await settingsService.getUserSettings(userId);
     if (settings) {
@@ -45,6 +57,12 @@ export const useSettingStore = create<SettingState>((set, get) => ({
     }
   },
 
+  /**
+   * 설정 업데이트
+   * @param key 업데이트할 설정 키
+   * @param value 새로운 설정값
+   * @param userId 설정을 저장할 사용자 ID (옵션)
+   */
   updateSettings: async <K extends keyof TypingSettings>(
     key: K,
     value: TypingSettings[K],

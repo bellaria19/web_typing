@@ -9,6 +9,7 @@ const TypingContainer = () => {
   const { loadContent, reset, isFinished, wpm, cpm, accuracy } =
     useTypingStore();
   const { t, i18n } = useTranslation();
+  // 사용자가 타이핑을 시작하기 전 집중을 위한 블러 상태 관리
   const [isBlurred, setIsBlurred] = useState(true);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const TypingContainer = () => {
     return () => reset();
   }, [i18n.language, loadContent, reset]);
 
+  // 컨테이너 클릭 시 블러 효과 제거
   const handleContainerClick = () => {
     setIsBlurred(false);
   };
@@ -57,7 +59,9 @@ const TypingContainer = () => {
 
   return (
     <TypingContainerWrapper onClick={handleContainerClick}>
+      {/* 블러 상태일 때 오버레이를 표시하여 사용자에게 클릭 가이드 제공 */}
       {isBlurred && <BlurOverlay>{t("TYPING.FOCUS_GUIDE")}</BlurOverlay>}
+      {/* 블러 효과를 CSS filter로 적용하여 타이핑 영역을 흐리게 표시 */}
       <div style={{ filter: isBlurred ? "blur(5px)" : "none" }}>
         <TextDisplay />
         <TestInput isBlurred={isBlurred} />

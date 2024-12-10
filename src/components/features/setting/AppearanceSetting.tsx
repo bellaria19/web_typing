@@ -15,12 +15,16 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import { TypingSettings } from "@/types/setting";
 
+// 화면 설정을 관리하는 컴포넌트
+// - 폰트 크기 조절 (0.5~3.0)
+// - 테마 선택
 export const AppearanceSetting = () => {
   const { t } = useTranslation();
   const { settings, updateSettings } = useSettingStore();
   const { currentTheme, setTheme } = useThemeStore();
   const { user } = useAuth();
 
+  // 설정 업데이트 핸들러 - 로그인된 사용자의 경우 DB에도 저장
   const handleUpdateSettings = <K extends keyof TypingSettings>(
     key: K,
     value: TypingSettings[K]

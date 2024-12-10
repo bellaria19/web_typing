@@ -2,6 +2,11 @@ import { create } from "zustand";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase/supabaseClient";
 
+/**
+ * 세션 관리를 위한 전역 상태 스토어
+ * - 세션 상태 관리
+ * - 세션 갱신 및 유효성 검사
+ */
 interface SessionState {
   session: Session | null;
   setSession: (session: Session | null) => void;
@@ -30,6 +35,11 @@ export const useSessionStore = create<SessionState>((set, get) => ({
       set({ session: null });
     }
   },
+
+  /**
+   * 세션 유효성 검사
+   * @returns 세션이 유효한지 여부
+   */
   isSessionValid: () => {
     const session = get().session;
     if (!session) return false;
@@ -38,6 +48,11 @@ export const useSessionStore = create<SessionState>((set, get) => ({
     if (!session.expires_at) return false;
     return session.expires_at > now;
   },
+
+  /**
+   * 세션 만료까지 남은 시간 계산
+   * @returns 만료까지 남은 시간(초)
+   */
   getSessionExpiresIn: () => {
     const session = get().session;
     if (!session) return 0;

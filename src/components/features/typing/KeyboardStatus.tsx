@@ -4,38 +4,22 @@ import { StatusItem } from "@/styles/typing.styles";
 
 const KeyboardStatus = () => {
   const [isCapsLock, setIsCapsLock] = useState(false);
-  const [isKorean, setIsKorean] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
+    // CapsLock 상태 변경 감지 핸들러
     const handleKeyEvent = (e: KeyboardEvent) => {
       if (e.getModifierState) {
         setIsCapsLock(e.getModifierState("CapsLock"));
       }
     };
 
-    const handleLanguageChange = (e: InputEvent) => {
-      const target = e.target as HTMLInputElement;
-      setIsKorean(
-        target.lang === "ko" ||
-          /[\u3131-\u314e\u314f-\u3163\uac00-\ud7a3]/.test(target.value)
-      );
-    };
-
-    const textInputs = document.querySelectorAll(
-      'input[type="text"], textarea'
-    );
-    textInputs.forEach((input) => {
-      input.addEventListener("input", handleLanguageChange as any);
-    });
-
+    // CapsLock 상태 감지를 위한 키보드 이벤트 리스너 등록
     window.addEventListener("keydown", handleKeyEvent);
     window.addEventListener("keyup", handleKeyEvent);
 
+    // 컴포넌트 언마운트 시 이벤트 리스너 정리
     return () => {
-      textInputs.forEach((input) => {
-        input.removeEventListener("input", handleLanguageChange as any);
-      });
       window.removeEventListener("keydown", handleKeyEvent);
       window.removeEventListener("keyup", handleKeyEvent);
     };
@@ -43,11 +27,7 @@ const KeyboardStatus = () => {
 
   return (
     <div className="flex flex-col gap-2 my-4 items-centent">
-      {/* <StatusItem $active={true}>
-        {isKorean
-          ? t("TYPING.KEYBOARD_LANGUAGE.KO")
-          : t("TYPING.KEYBOARD_LANGUAGE.EN")}
-      </StatusItem> */}
+      {/* CapsLock 상태 표시 - CapsLock이 켜져있을 때만 보임 */}
       <StatusItem
         $active={true}
         style={{ visibility: isCapsLock ? "visible" : "hidden" }}
