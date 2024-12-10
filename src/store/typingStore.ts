@@ -21,24 +21,6 @@ type CharCount = {
   correctSpaces: number;
 };
 
-// type Stats = {
-//   wpm: number;
-//   wpmRaw: number;
-//   acc: number;
-//   correctChars: number;
-//   incorrectChars: number;
-//   missedChars: number;
-//   extraChars: number;
-//   allChars: number;
-//   time: number;
-//   spaces: number;
-//   correctSpaces: number;
-// };
-
-const config = {
-  mode: "word",
-};
-
 interface TypingConfig {
   // 타이핑 진행 상태
   text: string;
@@ -388,48 +370,3 @@ const countChars = (
     correctSpaces,
   };
 };
-
-export function calculateTestSeconds(now?: number): number {
-  if (now === undefined) {
-    return (end - start) / 1000;
-  } else {
-    return (now - start) / 1000;
-  }
-}
-
-export function calculateAfkSeconds(testSeconds: number): number {
-  let extraAfk = 0;
-  if (testSeconds !== undefined) {
-    if (config.mode === "time") {
-      extraAfk =
-        Math.round(testSeconds) - TestInput.keypressCountHistory.length;
-    } else {
-      extraAfk = Math.ceil(testSeconds) - TestInput.keypressCountHistory.length;
-    }
-    if (extraAfk < 0) extraAfk = 0;
-    // console.log("-- extra afk debug");
-    // console.log("should be " + Math.ceil(testSeconds));
-    // console.log(keypressPerSecond.length);
-    // console.log(
-    //   `gonna add extra ${extraAfk} seconds of afk because of no keypress data`
-    // );
-  }
-  const ret = TestInput.afkHistory.filter((afk) => afk).length;
-  return ret + extraAfk;
-}
-
-export let start: number, end: number;
-export let start2: number, end2: number;
-export let start3: number, end3: number;
-
-export function setEnd(e: number): void {
-  end = e;
-  end2 = Date.now();
-  end3 = new Date().getTime();
-}
-
-export function setStart(s: number): void {
-  start = s;
-  start2 = Date.now();
-  start3 = new Date().getTime();
-}

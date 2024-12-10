@@ -43,6 +43,11 @@ const KeyboardStatus = () => {
 
   return (
     <div className="flex flex-col gap-2 my-4 items-centent">
+      {/* <StatusItem $active={true}>
+        {isKorean
+          ? t("TYPING.KEYBOARD_LANGUAGE.KO")
+          : t("TYPING.KEYBOARD_LANGUAGE.EN")}
+      </StatusItem> */}
       <StatusItem
         $active={true}
         style={{ visibility: isCapsLock ? "visible" : "hidden" }}
