@@ -3,44 +3,47 @@ import { useTypingStore } from "@/store/typingStore";
 import { useEffect, useState } from "react";
 
 const TextDisplay = () => {
-  const { text, currentIndex, errorIndices } = useTypingStore();
+  const { text, currentIndex, errorIndices, mode } = useTypingStore();
   const [isFocused, setIsFocused] = useState(false);
   const [lines, setLines] = useState<string[]>([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [visibleLines, setVisibleLines] = useState<string[]>([]);
 
   useEffect(() => {
-    // 텍스트를 단어로 분할
-    const words = text.split(" ");
-    const textLines: string[] = [];
-
-    // 5개 단어씩 묶어서 한 줄로 만듦
-    for (let i = 0; i < words.length; i += 5) {
-      const line = words.slice(i, i + 5).join(" ");
-      textLines.push(line);
+    if (mode === "word" || mode === "time") {
+      const words = text.split(" ");
+      const textLines: string[] = [];
+      for (let i = 0; i < words.length; i += 5) {
+        const line = words.slice(i, i + 5).join(" ");
+        textLines.push(line);
+      }
+      setLines(textLines);
+      setVisibleLines(textLines.slice(0, 2));
+    } else if (mode === "short" || mode === "long") {
+      const textLines = text.split("\n");
+      setLines(textLines);
+      setVisibleLines(textLines.slice(0, 2));
     }
-
-    setLines(textLines);
-    setVisibleLines(textLines.slice(0, 2));
-  }, [text]);
+  }, [text, mode]);
 
   useEffect(() => {
     let charCount = 0;
     let lineIndex = 0;
 
     for (let i = 0; i < lines.length; i++) {
-      if (charCount + lines[i].length + 1 > currentIndex) {
+      const lineLength = lines[i].length;
+      if (charCount + lineLength >= currentIndex) {
         lineIndex = i;
         break;
       }
-      charCount += lines[i].length + 1;
+      charCount += lineLength + (mode === "word" || mode === "time" ? 1 : 0);
     }
 
     if (lineIndex !== currentLineIndex) {
       setCurrentLineIndex(lineIndex);
       setVisibleLines(lines.slice(lineIndex, lineIndex + 2));
     }
-  }, [currentIndex, lines, currentLineIndex]);
+  }, [currentIndex, lines, currentLineIndex, mode]);
 
   useEffect(() => {
     const handleFocus = () => setIsFocused(true);
@@ -58,9 +61,10 @@ const TextDisplay = () => {
     };
   }, []);
 
-  let charCount = 0;
+  let displayCharCount = 0;
   for (let i = 0; i < currentLineIndex; i++) {
-    charCount += lines[i].length + 1;
+    displayCharCount +=
+      lines[i].length + (mode === "word" || mode === "time" ? 1 : 0);
   }
 
   return (
@@ -72,7 +76,7 @@ const TextDisplay = () => {
           $isVisible={true}
         >
           {line.split("").map((char, i) => {
-            const currentCharIndex = charCount + i;
+            const currentCharIndex = displayCharCount + i;
             const isCurrentLine = idx === 0;
 
             let state: "current" | "correct" | "incorrect" | "waiting" =

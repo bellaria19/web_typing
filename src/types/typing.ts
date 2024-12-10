@@ -17,13 +17,10 @@ export interface TypingText {
 }
 
 export interface TypingRecord {
-  id: number;
-  user_id: string;
+  mistakes: number;
   wpm: number;
   cpm: number;
   accuracy: number;
-  mistakes: number;
-  created_at: string;
 }
 
 export interface TypingWord {
@@ -44,12 +41,4 @@ export interface TypingLong {
   content: string;
   description: string;
   category: string;
-}
-
-export interface TypingRecord {
-  text: string;
-  mistakes: number;
-  wpm: number;
-  cpm: number;
-  accuracy: number;
 }

@@ -5,7 +5,6 @@ import { typingService } from "@/services/typingService";
 import {
   TestMode,
   Difficulty,
-  TypingRecord,
   TypingWord,
   TypingShort,
   TypingLong,
@@ -90,6 +89,9 @@ interface TypingConfig {
   setDifficulty: (difficulty: Difficulty) => void;
   setMode: (mode: TestMode) => void;
   setTimeLimit: (timeLimit: number) => void;
+
+  timeLimit: number | null;
+  checkTestEnd: () => void;
 }
 
 export const useTypingStore = create<TypingConfig>((set, get) => ({
@@ -117,10 +119,42 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
   rawHistory: [],
   errorIndices: [],
   keypressTimings: { spacing: [], duration: [] },
+  timeLimit: null,
 
   setText: (text: string) => set({ text }),
 
-  start: () => set({ isStarted: true, startTime: Date.now() }),
+  start: () => {
+    const { isStarted } = get();
+    if (!isStarted) {
+      const { mode, time } = get();
+      set({
+        isStarted: true,
+        startTime: Date.now(),
+        timeLimit: mode === "time" ? time * 1000 : null, // time 모드일 때만 timeLimit 설정
+      });
+    }
+  },
+
+  checkTestEnd: () => {
+    const { mode, timeLimit, startTime, text, currentIndex, isFinished } =
+      get();
+
+    if (isFinished) return;
+
+    // time 모드: 시간 제한 체크
+    if (mode === "time" && timeLimit && startTime) {
+      const currentTime = Date.now();
+      if (currentTime - startTime >= timeLimit) {
+        set({ isFinished: true });
+        get().saveRecord();
+      }
+    }
+    // 다른 모드들: 텍스트 완료 체크
+    else if (mode !== "time" && currentIndex === text.length) {
+      set({ isFinished: true });
+      get().saveRecord();
+    }
+  },
 
   handleInput: (input: string) => {
     const { text, currentIndex, isStarted } = get();
@@ -128,6 +162,14 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
     if (!isStarted) {
       set({ isStarted: true, startTime: Date.now() });
     }
+
+    console.log({
+      expected: text[currentIndex],
+      text,
+      received: input,
+      currentIndex,
+      isCorrect: text[currentIndex] === input,
+    });
 
     if (text[currentIndex] !== input) {
       set((state) => ({
@@ -146,6 +188,8 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
         currentIndex: state.currentIndex + 1,
       }));
     }
+
+    get().checkTestEnd();
   },
 
   reset: () => {
@@ -156,6 +200,7 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
       isStarted: false,
       startTime: null,
       endTime: null,
+      timeLimit: null,
       mistakes: 0,
       wpm: 0,
       cpm: 0,
@@ -167,6 +212,9 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
   },
 
   calculate: () => {
+    const { isStarted, isFinished } = get();
+    if (!isStarted || isFinished) return;
+
     const { text, currentIndex, startTime, errorIndices } = get();
     if (!startTime) return;
 
@@ -184,13 +232,15 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
     );
 
     const accuracy =
-      Math.round(
-        ((chars.allCorrectChars + chars.correctSpaces) /
-          (currentIndex + chars.spaces)) *
-          100
-      ) || 0;
+      currentIndex === 0
+        ? 100
+        : Math.round(
+            ((currentIndex - errorIndices.length) / currentIndex) * 100
+          );
 
     set({ wpm, cpm, accuracy });
+
+    get().checkTestEnd();
   },
 
   loadContent: async (language: string) => {
@@ -200,9 +250,9 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
       let data: TypingWord[] | TypingShort[] | TypingLong[] = [];
 
       switch (mode) {
+        case "time":
         case "word":
           data = await typingService.loadWords(wordCount);
-          console.log("data", data);
           text = (data as TypingWord[])
             .map((word) =>
               language === "ko" ? word.korean_word : word.english_word
@@ -210,13 +260,13 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
             .join(" ");
           break;
         case "short":
-          data = await typingService.loadShorts(20);
+          data = await typingService.loadShorts(50);
           text = (data as TypingShort[])
             .map((short) => short.content)
             .join("\n");
           break;
         case "long":
-          data = await typingService.loadLongs(10);
+          data = await typingService.loadLongs(1);
           text = (data as TypingLong[]).map((long) => long.content).join("\n");
           break;
       }
@@ -225,21 +275,8 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
         throw new Error("텍스트를 생성할 수 없습니다.");
       }
 
-      set({
-        text,
-        currentIndex: 0,
-        isFinished: false,
-        isStarted: false,
-        startTime: null,
-        endTime: null,
-        mistakes: 0,
-        wpm: 0,
-        cpm: 0,
-        accuracy: 0,
-        rawHistory: [],
-        errorIndices: [],
-        keypressTimings: { spacing: [], duration: [] },
-      });
+      get().reset();
+      set({ text });
 
       console.log("타이핑 상태 초기화 완료");
       return true;
@@ -251,18 +288,17 @@ export const useTypingStore = create<TypingConfig>((set, get) => ({
   },
 
   saveRecord: async () => {
-    const { text, mistakes, wpm, cpm, accuracy } = get();
+    const { mistakes, wpm, cpm, accuracy } = get();
 
     try {
       await typingService.saveRecord({
-        text,
         mistakes,
         wpm,
         cpm,
         accuracy,
-      } as TypingRecord);
+      });
     } catch (error) {
-      console.error(error);
+      console.error("기록 저장 실패:", error);
     }
   },
 

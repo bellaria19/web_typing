@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import KeyboardStatus from "@/components/features/typing/KeyboardStatus";
 
 const Typing = () => {
-  const { wpm, cpm, accuracy, calculate, loadContent } = useTypingStore();
+  const { mode, wpm, cpm, accuracy, calculate, loadContent } = useTypingStore();
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Typing = () => {
     <Wrapper>
       <div className="flex flex-row items-center justify-center gap-2 my-4">
         <TypeSelector />
-        <TimeSelector />
+        {mode === "time" && <TimeSelector />}
         <DifficultySelector />
       </div>
       <div className="flex items-center justify-center gap-4 mb-24">
